@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --color-brand-red: #e31e24;
+  --color-brand-black: #050505;
+  --color-brand-gray-light: #f5f5f7;
+  --color-brand-gray-dark: #1d1d1f;
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-brand-black bg-white antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight font-semibold;
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply max-w-7xl mx-auto px-6 md:px-12 py-24;
+  }
+
+  .premium-blur {
+    @apply backdrop-blur-xl bg-white/70 border border-white/20;
+  }
+
+  .text-glow-red {
+    text-shadow: 0 0 15px rgba(227, 30, 36, 0.4);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-brand-gray-light;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-brand-gray-dark/20 rounded-full hover:bg-brand-red/40 transition-colors;
+}

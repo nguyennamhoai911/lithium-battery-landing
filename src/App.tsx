@@ -17,13 +17,13 @@ import {
   X,
   ArrowUpRight
 } from 'lucide-react';
-import { 
-  PRODUCT_LINE_DATA, 
-  PRODUCT_MODELS, 
-  APPLICATIONS, 
-  TECH_HIGHLIGHTS, 
+import {
+  PRODUCT_LINE_DATA,
+  PRODUCT_MODELS,
+  APPLICATIONS,
+  TECH_HIGHLIGHTS,
   CREDIBILITY_FACTORS,
-  ProductModel 
+  ProductModel
 } from './constants';
 
 // --- Components ---
@@ -543,19 +543,19 @@ export default function App() {
               </button>
             </div>
             <div className="lg:col-span-2">
-              <FAQItem 
+              <FAQItem
                 question="How much weight can we save by switching to PKG Lithium?"
                 answer="Standard lead-acid configurations for a 14-seater touring bus typically weigh around 350-400kg. Our equivalent PKG-LS system weighs approximately 120-140kg, saving over 60% in battery weight, which directly translates to improved range and less suspension wear."
               />
-              <FAQItem 
+              <FAQItem
                 question="Can your batteries be charged from 110V/220V standard outlets?"
                 answer="Yes, with our integrated charging solutions. We offer on-board chargers that plug directly into standard facility AC outlets, as well as high-speed DC charging stations for 2-hour rapid turnaround."
               />
-              <FAQItem 
+              <FAQItem
                 question="Are custom dimensions available for legacy vehicles?"
                 answer="Absolutely. One of PKG Battery's strengths is our OEM/ODM capability. While we have standard case sizes, we can engineer custom physical enclosures and specialized wiring harnesses to retrofit legacy lead-acid battery bays without modifying the vehicle chassis."
               />
-              <FAQItem 
+              <FAQItem
                 question="What is the real-world lifespan of the LS-Series?"
                 answer="Based on resort operation cycles (approx. 2 cycles per day), our batteries are designed to last 5-7 years before reaching 80% of original capacity. In comparison, lead-acid batteries in similar conditions often need replacement every 12-18 months."
               />

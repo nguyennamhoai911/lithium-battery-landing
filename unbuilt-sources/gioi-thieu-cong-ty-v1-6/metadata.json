@@ -1,0 +1,8 @@
+{
+  "name": "Giới thiệu công ty v1.6",
+  "description": "Tiên phong giải pháp năng lượng Lithium tại Việt Nam. Chuyên nghiệp, đẳng cấp và tin cậy cho doanh nghiệp B2B.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}

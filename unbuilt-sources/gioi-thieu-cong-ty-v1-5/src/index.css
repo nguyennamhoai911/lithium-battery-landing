@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-heading: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
+
+  --color-pkg-red: #D61F26;
+  --color-pkg-red-dark: #A5181D;
+  --color-pkg-black: #111111;
+  --color-pkg-graphite: #2B2B2B;
+  --color-pkg-silver: #E5E5E5;
+}
+
+@layer base {
+  body {
+    @apply bg-white text-pkg-black antialiased overflow-x-hidden selection:bg-pkg-red/20 selection:text-pkg-red;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass-card {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  
+  .text-glow-red {
+    text-shadow: 0 0 20px rgba(214, 31, 38, 0.4);
+  }
+
+  .bg-industrial-gradient {
+    background: linear-gradient(135deg, #111111 0%, #2B2B2B 100%);
+  }
+
+  .bg-red-gradient {
+    background: linear-gradient(135deg, #D61F26 0%, #A5181D 100%);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 4px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-pkg-red/30 rounded-full hover:bg-pkg-red;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D61F26;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A5181D;
+}

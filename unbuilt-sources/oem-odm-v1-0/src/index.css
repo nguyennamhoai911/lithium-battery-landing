@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+@theme {
+  --font-sans: "Inter", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --color-brand-red: #D71920;
+  --color-brand-red-dark: #9E1016;
+  --color-industrial-black: #08090B;
+  --color-soft-grey: #F4F5F7;
+  --color-line-grey: #D7DAE0;
+  --color-graphite: #17191D;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-white text-industrial-black antialiased;
+  }
+}
+
+@layer utilities {
+  .container-wide {
+    @apply max-w-(--breakpoint-2xl) mx-auto px-5 md:px-10 lg:px-16;
+  }
+  .section-padding {
+    @apply py-20 md:py-32 lg:py-40;
+  }
+}

@@ -1,0 +1,2180 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OEM/ODM Pin Lithium Công Nghiệp | PKGBattery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --red: #D42B2B;
+  --red-dim: rgba(212,43,43,0.12);
+  --red-glow: rgba(212,43,43,0.18);
+  --black: #0A0A0A;
+  --off-black: #111111;
+  --dark: #1A1A1A;
+  --mid-dark: #242424;
+  --border-dark: rgba(255,255,255,0.08);
+  --border-light: rgba(0,0,0,0.08);
+  --white: #FFFFFF;
+  --off-white: #F8F7F5;
+  --light-gray: #EEEDE9;
+  --text-muted: #888880;
+  --text-secondary: #555550;
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--black);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 60px;
+  height: 72px;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--red); }
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+
+.nav-cta {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  background: var(--red);
+  border: none;
+  padding: 10px 24px;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+  transition: background 0.2s, transform 0.15s;
+}
+.nav-cta:hover { background: #B52020; transform: translateY(-1px); }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  background: var(--black);
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  padding-top: 72px;
+}
+
+.hero-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.6;
+}
+
+.hero-red-line {
+  position: absolute;
+  top: 0; left: 38%;
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--red) 30%, var(--red) 70%, transparent);
+  opacity: 0.15;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 20%;
+  left: 35%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(212,43,43,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 100px 60px 80px 80px;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+.hero-eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: var(--red);
+}
+.hero-eyebrow span {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 5vw, 66px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--white);
+  letter-spacing: -1px;
+  margin-bottom: 28px;
+}
+.hero-title em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,255,255,0.35);
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.75;
+  max-width: 460px;
+  margin-bottom: 48px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 60px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red);
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 16px 32px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  letter-spacing: 0.3px;
+}
+.btn-primary:hover { background: #B52020; transform: translateY(-2px); }
+.btn-primary svg { transition: transform 0.2s; }
+.btn-primary:hover svg { transform: translateX(3px); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 500;
+  padding: 16px 32px;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.05); }
+
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 32px;
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 28px;
+  margin-right: 28px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px;
+  color: rgba(255,255,255,0.45);
+}
+.trust-item:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.trust-dot {
+  width: 4px; height: 4px;
+  background: var(--red);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.hero-visual {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-img-block {
+  position: absolute;
+  inset: 0;
+  background: 
+    linear-gradient(to right, var(--black) 0%, transparent 30%),
+    linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Placeholder visual for hero */
+.hero-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.battery-diagram {
+  position: relative;
+  width: 280px;
+  height: 420px;
+  opacity: 0.7;
+}
+
+.batt-body {
+  position: absolute;
+  inset: 20px 0 0;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
+}
+
+.batt-top {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 22px;
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-bottom: none;
+  background: rgba(255,255,255,0.03);
+}
+
+.batt-cells {
+  position: absolute;
+  inset: 40px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.batt-cell {
+  height: 20px;
+  background: linear-gradient(to right, var(--red), rgba(212,43,43,0.3));
+  opacity: 0;
+  animation: cellFill 3s ease-in-out infinite;
+}
+.batt-cell:nth-child(1) { animation-delay: 0s; }
+.batt-cell:nth-child(2) { animation-delay: 0.15s; }
+.batt-cell:nth-child(3) { animation-delay: 0.3s; }
+.batt-cell:nth-child(4) { animation-delay: 0.45s; }
+.batt-cell:nth-child(5) { animation-delay: 0.6s; }
+.batt-cell:nth-child(6) { animation-delay: 0.75s; }
+.batt-cell:nth-child(7) { animation-delay: 0.9s; }
+.batt-cell:nth-child(8) { animation-delay: 1.05s; }
+
+@keyframes cellFill {
+  0% { opacity: 0; }
+  10% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { opacity: 0; }
+}
+
+.batt-label {
+  position: absolute;
+  right: -120px;
+  font-size: 10px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.batt-label::before {
+  content: '';
+  display: block;
+  width: 30px;
+  height: 1px;
+  background: rgba(255,255,255,0.15);
+}
+.batt-label-1 { top: 80px; }
+.batt-label-2 { top: 170px; }
+.batt-label-3 { top: 260px; }
+.batt-label-4 { top: 350px; }
+
+.hero-specs {
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.spec-item {
+  text-align: right;
+}
+.spec-value {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+}
+.spec-label {
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* ── SECTION BASE ── */
+section { position: relative; }
+
+.section-light { background: var(--white); }
+.section-offwhite { background: var(--off-white); }
+.section-dark { background: var(--off-black); color: var(--white); }
+.section-black { background: var(--black); color: var(--white); }
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 80px;
+}
+
+/* ── WHY PKG ── */
+#why {
+  padding: 140px 0;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.why-inner {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  gap: 100px;
+  align-items: start;
+}
+
+.why-left {
+  position: sticky;
+  top: 120px;
+}
+
+.section-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.eyebrow-line {
+  width: 24px;
+  height: 1px;
+  background: var(--red);
+}
+.eyebrow-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 3.5vw, 50px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.5px;
+  margin-bottom: 24px;
+}
+
+.section-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.why-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.why-item {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 28px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border-light);
+  cursor: default;
+  transition: all 0.3s;
+}
+.why-item:first-child { padding-top: 0; }
+.why-item:last-child { border-bottom: none; }
+.why-item:hover .why-icon { background: var(--red); }
+.why-item:hover .why-icon svg { color: var(--white); }
+.why-item:hover .why-item-title { color: var(--red); }
+
+.why-num {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--red);
+  padding-top: 4px;
+  letter-spacing: 1px;
+}
+
+.why-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s;
+}
+.why-icon svg { width: 18px; height: 18px; stroke: var(--text-secondary); transition: color 0.25s; }
+
+.why-item-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  transition: color 0.25s;
+  letter-spacing: -0.2px;
+}
+
+.why-item-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+}
+
+/* ── CAPABILITIES ── */
+#capabilities {
+  padding: 140px 0;
+  background: var(--off-white);
+  overflow: hidden;
+}
+
+.cap-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+  align-items: end;
+}
+
+.cap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1px;
+  background: var(--border-light);
+}
+
+.cap-card {
+  background: var(--white);
+  padding: 44px 36px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+  cursor: default;
+}
+.cap-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.cap-card:hover { background: var(--off-black); }
+.cap-card:hover::before { transform: scaleX(1); }
+.cap-card:hover .cap-number { color: rgba(255,255,255,0.15); }
+.cap-card:hover .cap-title { color: var(--white); }
+.cap-card:hover .cap-desc { color: rgba(255,255,255,0.5); }
+.cap-card:hover .cap-icon svg { stroke: var(--red); }
+
+.cap-number {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--light-gray);
+  line-height: 1;
+  margin-bottom: 24px;
+  transition: color 0.3s;
+}
+
+.cap-icon {
+  margin-bottom: 20px;
+}
+.cap-icon svg {
+  width: 24px; height: 24px;
+  stroke: var(--text-secondary);
+  transition: stroke 0.3s;
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.cap-title {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  transition: color 0.3s;
+  letter-spacing: -0.2px;
+}
+
+.cap-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  transition: color 0.3s;
+}
+
+/* ── PROCESS ── */
+#process {
+  padding: 140px 0;
+  background: var(--black);
+  color: var(--white);
+  overflow: hidden;
+}
+
+.process-header {
+  text-align: center;
+  margin-bottom: 100px;
+}
+.process-header .section-title { color: var(--white); }
+.process-header .section-desc { color: rgba(255,255,255,0.45); max-width: 500px; margin: 0 auto; }
+
+.process-timeline {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.process-line {
+  position: absolute;
+  left: 32px;
+  top: 0; bottom: 0;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, var(--red) 10%, var(--red) 90%, transparent);
+  opacity: 0.3;
+}
+
+.process-step {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 40px;
+  padding: 48px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  transition: all 0.3s;
+}
+.process-step:last-child { border-bottom: none; }
+.process-step:hover .step-dot { background: var(--red); box-shadow: 0 0 20px rgba(212,43,43,0.4); }
+.process-step:hover .step-number { color: rgba(255,255,255,0.2); }
+.process-step:hover .step-title { color: var(--red); }
+
+.step-dot {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid rgba(212,43,43,0.5);
+  border-radius: 50%;
+  background: var(--black);
+  position: absolute;
+  left: 24px;
+  top: 60px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.step-num-col {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 8px;
+}
+
+.step-number {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 2px;
+  transition: color 0.3s;
+}
+
+.step-content {}
+
+.step-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: -0.3px;
+  transition: color 0.3s;
+}
+
+.step-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.8;
+  max-width: 560px;
+}
+
+.step-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+.step-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: rgba(212,43,43,0.8);
+  border: 1px solid rgba(212,43,43,0.25);
+  padding: 4px 12px;
+}
+
+/* ── APPLICATIONS ── */
+#applications {
+  padding: 140px 0;
+  background: var(--white);
+  overflow: hidden;
+}
+
+.app-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  margin-bottom: 80px;
+  align-items: end;
+}
+
+.app-platform {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 60px;
+}
+
+.app-center {
+  width: 160px;
+  height: 160px;
+  background: var(--off-black);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 1px rgba(212,43,43,0.2), 0 0 60px rgba(212,43,43,0.08);
+}
+.app-center-title {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: 0.5px;
+}
+.app-center-sub {
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border-light);
+}
+
+.app-item {
+  background: var(--white);
+  padding: 36px 28px;
+  cursor: default;
+  transition: background 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.app-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--off-black);
+  transform: translateY(100%);
+  transition: transform 0.3s ease;
+}
+.app-item:hover::after { transform: translateY(0); }
+.app-item:hover .app-item-icon { color: var(--red); }
+.app-item:hover .app-item-name { color: var(--white); }
+.app-item:hover .app-item-desc { color: rgba(255,255,255,0.4); }
+
+.app-item-icon, .app-item-name, .app-item-desc {
+  position: relative;
+  z-index: 1;
+  transition: color 0.3s;
+}
+
+.app-item-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  display: block;
+}
+.app-item-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.2px;
+}
+.app-item-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── FACTORY ── */
+#factory {
+  padding: 140px 0;
+  background: var(--off-black);
+  color: var(--white);
+  overflow: hidden;
+}
+
+.factory-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.factory-header .section-title { color: var(--white); }
+.factory-header .section-desc { color: rgba(255,255,255,0.45); max-width: 500px; margin: 0 auto; }
+
+.factory-gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 260px 260px;
+  gap: 2px;
+  margin-bottom: 80px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--dark);
+  cursor: pointer;
+}
+.gallery-item:first-child {
+  grid-row: 1 / 3;
+}
+.gallery-item:hover .gallery-overlay { opacity: 1; }
+.gallery-item:hover .gallery-img-placeholder { transform: scale(1.04); }
+
+.gallery-img-placeholder {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Tinted backgrounds to simulate factory images */
+.gi-1 { background: linear-gradient(135deg, #1e1e1e 0%, #2d1a1a 100%); }
+.gi-2 { background: linear-gradient(135deg, #181818 0%, #2a2200 100%); }
+.gi-3 { background: linear-gradient(135deg, #1a1a2e 0%, #0d0d0d 100%); }
+.gi-4 { background: linear-gradient(135deg, #0d1a0d 0%, #1a1a1a 100%); }
+.gi-5 { background: linear-gradient(135deg, #2a1a00 0%, #1a1a1a 100%); }
+
+.gallery-placeholder-icon {
+  font-size: 36px;
+  opacity: 0.3;
+}
+.gallery-placeholder-text {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 28px;
+}
+.gallery-caption {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.3px;
+}
+.gallery-caption-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4px;
+}
+
+.factory-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(255,255,255,0.05);
+}
+.factory-stat {
+  padding: 44px 36px;
+  background: var(--off-black);
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-value span { color: var(--red); }
+.stat-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.5;
+}
+.stat-note {
+  font-size: 10px;
+  color: rgba(255,255,255,0.2);
+  margin-top: 4px;
+}
+
+/* ── QUALITY ── */
+#quality {
+  padding: 140px 0;
+  background: var(--white);
+}
+
+.quality-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.quality-visual {
+  position: relative;
+  height: 500px;
+  background: var(--off-black);
+  overflow: hidden;
+}
+
+.quality-visual-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212,43,43,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,43,43,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.quality-checklist {
+  position: absolute;
+  inset: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+}
+
+.quality-check {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.02);
+  transition: border-color 0.3s, background 0.3s;
+}
+.quality-check:hover {
+  border-color: rgba(212,43,43,0.3);
+  background: rgba(212,43,43,0.04);
+}
+
+.check-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(212,43,43,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.check-icon svg { width: 14px; height: 14px; stroke: var(--red); fill: none; stroke-width: 2; }
+.check-label {
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 500;
+}
+
+.quality-content { }
+.quality-content .section-desc { margin-bottom: 40px; }
+
+.quality-points {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.quality-point {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.qp-num {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red);
+  min-width: 28px;
+  padding-top: 2px;
+}
+
+.qp-title {
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 6px;
+}
+.qp-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ── CERTS ── */
+#certs {
+  padding: 100px 0;
+  background: var(--off-white);
+}
+
+.certs-header { text-align: center; margin-bottom: 60px; }
+
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border-light);
+  margin-bottom: 60px;
+}
+
+.cert-item {
+  background: var(--white);
+  padding: 44px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  cursor: default;
+  transition: background 0.25s;
+}
+.cert-item:hover {
+  background: var(--off-black);
+}
+.cert-item:hover .cert-name { color: var(--white); }
+.cert-item:hover .cert-desc { color: rgba(255,255,255,0.4); }
+
+.cert-badge {
+  width: 60px;
+  height: 60px;
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--black);
+  transition: border-color 0.25s, color 0.25s;
+}
+.cert-item:hover .cert-badge { border-color: var(--red); color: var(--red); }
+
+.cert-name {
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
+  transition: color 0.25s;
+}
+.cert-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.5;
+  transition: color 0.25s;
+}
+
+.partners-note {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+/* ── CONTACT ── */
+#contact {
+  padding: 140px 0;
+  background: var(--black);
+  color: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-bg-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(212,43,43,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.contact-left { }
+.contact-left .section-title { color: var(--white); font-size: clamp(28px, 3vw, 44px); }
+
+.contact-points {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-top: 48px;
+}
+.contact-point {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+.cp-dot {
+  width: 6px; height: 6px;
+  background: var(--red);
+  border-radius: 50%;
+  margin-top: 7px;
+  flex-shrink: 0;
+}
+.cp-text {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+}
+
+.form-input, .form-textarea, .form-select {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  padding: 14px 18px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  width: 100%;
+  appearance: none;
+}
+.form-input::placeholder, .form-textarea::placeholder {
+  color: rgba(255,255,255,0.2);
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color: rgba(212,43,43,0.5);
+  background: rgba(255,255,255,0.06);
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-select option {
+  background: var(--dark);
+  color: var(--white);
+}
+
+.file-upload {
+  border: 1px dashed rgba(255,255,255,0.12);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  font-size: 12px;
+  color: rgba(255,255,255,0.3);
+}
+.file-upload:hover { border-color: rgba(212,43,43,0.4); color: rgba(255,255,255,0.5); }
+
+.form-submit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--red);
+  color: var(--white);
+  border: none;
+  padding: 18px 36px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background 0.2s;
+  letter-spacing: 0.3px;
+  margin-top: 8px;
+  align-self: flex-start;
+}
+.form-submit:hover { background: #B52020; }
+
+.form-note {
+  font-size: 11px;
+  color: rgba(255,255,255,0.25);
+  margin-top: -4px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--off-black);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 48px 0;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--white);
+}
+.footer-logo span { color: var(--red); }
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.footer-links a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+.footer-copy {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .container { padding: 0 40px; }
+  nav { padding: 0 40px; }
+  #hero { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+  .hero-content { padding: 80px 40px; }
+  .why-inner { grid-template-columns: 1fr; gap: 60px; }
+  .why-left { position: static; }
+  .cap-grid { grid-template-columns: 1fr 1fr; }
+  .app-grid { grid-template-columns: repeat(2, 1fr); }
+  .factory-gallery { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+  .factory-gallery .gallery-item:first-child { grid-row: auto; }
+  .factory-stats { grid-template-columns: 1fr 1fr; }
+  .quality-inner { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; }
+  .certs-grid { grid-template-columns: repeat(3, 1fr); }
+  .cap-header { grid-template-columns: 1fr; gap: 24px; }
+  .app-header { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 700px) {
+  .container { padding: 0 24px; }
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  #hero { padding-top: 72px; }
+  .hero-content { padding: 60px 24px; }
+  .cap-grid { grid-template-columns: 1fr; }
+  .factory-stats { grid-template-columns: 1fr 1fr; }
+  .certs-grid { grid-template-columns: 1fr 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+  .factory-gallery { grid-template-columns: 1fr; }
+  .trust-item { border-right: none; padding-right: 0; margin-right: 0; }
+}
+
+/* Particle canvas */
+#particle-canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">PKG<span>Battery</span></div>
+  <ul class="nav-links">
+    <li><a href="#why">Năng lực</a></li>
+    <li><a href="#process">Quy trình</a></li>
+    <li><a href="#applications">Ứng dụng</a></li>
+    <li><a href="#factory">Nhà máy</a></li>
+    <li><a href="#contact">Liên hệ</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Tư vấn dự án</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="particle-canvas"></canvas>
+  <div class="hero-bg-grid"></div>
+  <div class="hero-red-line"></div>
+  <div class="hero-glow"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>OEM / ODM — Sản xuất theo yêu cầu</span>
+    </div>
+
+    <h1 class="hero-title">
+      Sản xuất<br>
+      pin lithium<br>
+      <em>công nghiệp</em><br>
+      theo yêu cầu
+    </h1>
+
+    <p class="hero-sub">
+      PKGBattery đồng hành từ tư vấn kỹ thuật, thiết kế giải pháp, thử mẫu đến sản xuất hoàn thiện — tại nhà máy riêng tại Việt Nam.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        Gọi tư vấn dự án
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contact" class="btn-ghost">Gửi yêu cầu thiết kế</a>
+    </div>
+
+    <div class="hero-trust">
+      <div class="trust-item">
+        <span class="trust-dot"></span>
+        <span>Nhà máy riêng</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-dot"></span>
+        <span>Hỗ trợ R&amp;D</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-dot"></span>
+        <span>Thiết kế theo yêu cầu</span>
+      </div>
+      <div class="trust-item">
+        <span class="trust-dot"></span>
+        <span>Kiểm soát đầu vào – đầu ra</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-img-block">
+      <div class="hero-placeholder">
+        <!-- Ảnh nhà máy / dây chuyền sản xuất pin (thay bằng ảnh thật) -->
+        <div class="battery-diagram">
+          <div class="batt-top"></div>
+          <div class="batt-body">
+            <div class="batt-cells">
+              <div class="batt-cell"></div>
+              <div class="batt-cell"></div>
+              <div class="batt-cell"></div>
+              <div class="batt-cell"></div>
+              <div class="batt-cell"></div>
+              <div class="batt-cell"></div>
+              <div class="batt-cell"></div>
+              <div class="batt-cell"></div>
+            </div>
+          </div>
+          <div class="batt-label batt-label-1">BMS Module</div>
+          <div class="batt-label batt-label-2">Cell Pack</div>
+          <div class="batt-label batt-label-3">Thermal Mgmt</div>
+          <div class="batt-label batt-label-4">Connector</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-specs">
+      <div class="spec-item">
+        <div class="spec-value">48V</div>
+        <div class="spec-label">đến 400V</div>
+      </div>
+      <div class="spec-item">
+        <div class="spec-value">20Ah</div>
+        <div class="spec-label">đến 600Ah+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY PKG -->
+<section id="why">
+  <div class="container">
+    <div class="why-inner">
+      <div class="why-left">
+        <div class="section-eyebrow">
+          <div class="eyebrow-line"></div>
+          <span class="eyebrow-text">Vì sao chọn chúng tôi</span>
+        </div>
+        <h2 class="section-title reveal">Đối tác sản xuất —<br>không chỉ là nhà cung cấp</h2>
+        <p class="section-desc reveal reveal-delay-1">
+          Chúng tôi xây dựng giải pháp pin theo đặc thù vận hành của từng doanh nghiệp, không bán theo catalogue có sẵn.
+        </p>
+      </div>
+
+      <div class="why-right">
+        <div class="why-item reveal">
+          <div>
+            <div class="why-num">01</div>
+          </div>
+          <div>
+            <div class="why-item-title">Nhà máy riêng tại Việt Nam</div>
+            <p class="why-item-desc">Toàn bộ quy trình sản xuất được thực hiện tại cơ sở của PKGBattery — không phụ thuộc trung gian, kiểm soát chất lượng toàn trình từ linh kiện đến thành phẩm.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal reveal-delay-1">
+          <div>
+            <div class="why-num">02</div>
+          </div>
+          <div>
+            <div class="why-item-title">Full product manufacturing</div>
+            <p class="why-item-desc">Không chỉ cung cấp linh kiện rời. PKGBattery thiết kế và sản xuất pack pin hoàn chỉnh — tích hợp BMS, vỏ, kết nối, bảo vệ theo đúng ứng dụng của đối tác.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal reveal-delay-2">
+          <div>
+            <div class="why-num">03</div>
+          </div>
+          <div>
+            <div class="why-item-title">Thiết kế hoàn toàn theo yêu cầu</div>
+            <p class="why-item-desc">Điện áp, dung lượng, kích thước, giao tiếp, thương hiệu, bao bì — tất cả đều có thể tùy chỉnh. Nếu bạn có bài toán kỹ thuật, chúng tôi có giải pháp.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal">
+          <div>
+            <div class="why-num">04</div>
+          </div>
+          <div>
+            <div class="why-item-title">Đội ngũ kỹ thuật đồng hành</div>
+            <p class="why-item-desc">Từ buổi tư vấn đầu tiên đến khi bàn giao, kỹ sư PKGBattery tham gia trực tiếp vào dự án — không phải bộ phận hỗ trợ sau bán hàng.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal reveal-delay-1">
+          <div>
+            <div class="why-num">05</div>
+          </div>
+          <div>
+            <div class="why-item-title">Phù hợp nhiều ngành công nghiệp</div>
+            <p class="why-item-desc">Xe nâng điện, AGV, robot công nghiệp, thiết bị năng lượng, xe điện chuyên dụng và các dự án đặc thù — PKGBattery có kinh nghiệm thực tế trên nhiều nhóm ứng dụng.</p>
+          </div>
+        </div>
+
+        <div class="why-item reveal reveal-delay-2">
+          <div>
+            <div class="why-num">06</div>
+          </div>
+          <div>
+            <div class="why-item-title">Kiểm soát chất lượng nghiêm ngặt</div>
+            <p class="why-item-desc">Quy trình kiểm tra nhiều bước — từ nguồn linh kiện đầu vào, kiểm tra cấu hình kỹ thuật, an toàn, hiệu năng, đến kiểm tra trước bàn giao cho đối tác.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPABILITIES -->
+<section id="capabilities">
+  <div class="container">
+    <div class="cap-header">
+      <div>
+        <div class="section-eyebrow reveal">
+          <div class="eyebrow-line"></div>
+          <span class="eyebrow-text">Năng lực OEM / ODM</span>
+        </div>
+        <h2 class="section-title reveal">Chúng tôi<br>làm được gì<br>cho bạn</h2>
+      </div>
+      <div>
+        <p class="section-desc reveal" style="color: var(--text-secondary); font-size: 15px; line-height: 1.8;">
+          Từ bản vẽ kỹ thuật đến sản phẩm hoàn thiện — PKGBattery cung cấp năng lực sản xuất đầy đủ cho doanh nghiệp muốn có sản phẩm pin riêng, theo đúng thông số và thương hiệu của mình.
+        </p>
+      </div>
+    </div>
+
+    <div class="cap-grid">
+      <div class="cap-card reveal">
+        <div class="cap-number">01</div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12h6M9 16h6M17 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2z"/><path d="M9 8h6"/></svg>
+        </div>
+        <div class="cap-title">Tư vấn cấu hình kỹ thuật</div>
+        <p class="cap-desc">Phân tích yêu cầu ứng dụng, đề xuất cấu hình pin phù hợp: điện áp, dung lượng, dòng xả, chu kỳ sử dụng, điều kiện môi trường.</p>
+      </div>
+
+      <div class="cap-card reveal reveal-delay-1">
+        <div class="cap-number">02</div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+        </div>
+        <div class="cap-title">Thiết kế pack pin theo yêu cầu</div>
+        <p class="cap-desc">Thiết kế kích thước, kết cấu, bố cục cell, hệ thống BMS, giao tiếp (CAN, UART, SMBus) theo đặc thù từng dự án.</p>
+      </div>
+
+      <div class="cap-card reveal reveal-delay-2">
+        <div class="cap-number">03</div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="cap-title">Tùy chỉnh vỏ & kết nối</div>
+        <p class="cap-desc">Thiết kế vỏ nhôm, nhựa kỹ thuật, giao tiếp connector, IP rating, logo, bao bì thương hiệu riêng cho đối tác.</p>
+      </div>
+
+      <div class="cap-card reveal">
+        <div class="cap-number">04</div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+        </div>
+        <div class="cap-title">BMS & kiểm tra an toàn</div>
+        <p class="cap-desc">Tích hợp BMS chuyên dụng, kiểm tra bảo vệ quá áp, quá dòng, ngắn mạch, nhiệt độ và kiểm thử chu kỳ thực tế trước khi bàn giao.</p>
+      </div>
+
+      <div class="cap-card reveal reveal-delay-1">
+        <div class="cap-number">05</div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22V12"/><path d="M12 12C12 12 8 8 4 10"/><path d="M12 12C12 12 16 8 20 10"/><path d="M4 10a8 8 0 0116 0"/></svg>
+        </div>
+        <div class="cap-title">Thử mẫu & sản xuất hàng loạt</div>
+        <p class="cap-desc">Sản xuất mẫu thử nghiệm, hiệu chỉnh theo phản hồi, xác nhận rồi chuyển sang sản xuất số lượng lớn với quy trình ổn định.</p>
+      </div>
+
+      <div class="cap-card reveal reveal-delay-2">
+        <div class="cap-number">06</div>
+        <div class="cap-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="cap-title">Private label & sản phẩm riêng</div>
+        <p class="cap-desc">Hỗ trợ doanh nghiệp xây dựng dòng sản phẩm pin mang thương hiệu riêng — từ thiết kế nhận dạng đến hoàn thiện bao bì xuất xưởng.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="container">
+    <div class="process-header">
+      <div class="section-eyebrow" style="justify-content: center;">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Quy trình hợp tác</span>
+      </div>
+      <h2 class="section-title reveal">Từ yêu cầu<br>đến sản phẩm</h2>
+      <p class="section-desc reveal">Quy trình minh bạch, từng bước rõ ràng — để bạn biết mình đang ở đâu trong dự án.</p>
+    </div>
+
+    <div class="process-timeline">
+      <div class="process-line"></div>
+
+      <div class="process-step reveal">
+        <div class="step-dot"></div>
+        <div class="step-num-col"><span class="step-number">01</span></div>
+        <div class="step-content">
+          <h3 class="step-title">Tiếp nhận nhu cầu</h3>
+          <p class="step-desc">Bạn chia sẻ bài toán vận hành, ứng dụng, hoặc thông số mong muốn — dù chưa rõ hoàn toàn, đội ngũ PKGBattery vẫn có thể trao đổi và làm rõ cùng bạn.</p>
+          <div class="step-tags">
+            <span class="step-tag">Gọi điện / Email</span>
+            <span class="step-tag">Tài liệu kỹ thuật</span>
+            <span class="step-tag">Bản vẽ tham chiếu</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-dot"></div>
+        <div class="step-num-col"><span class="step-number">02</span></div>
+        <div class="step-content">
+          <h3 class="step-title">Tư vấn kỹ thuật & đề xuất giải pháp</h3>
+          <p class="step-desc">Kỹ sư PKGBattery phân tích yêu cầu, đánh giá tính khả thi, đề xuất cấu hình pin phù hợp về điện áp, dung lượng, kết cấu và chi phí sản xuất.</p>
+          <div class="step-tags">
+            <span class="step-tag">Phân tích ứng dụng</span>
+            <span class="step-tag">Đề xuất cấu hình</span>
+            <span class="step-tag">Dự kiến chi phí</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-dot"></div>
+        <div class="step-num-col"><span class="step-number">03</span></div>
+        <div class="step-content">
+          <h3 class="step-title">Thiết kế cấu hình & bản mẫu</h3>
+          <p class="step-desc">Tiến hành thiết kế chi tiết: chọn cell, thiết kế BMS, thiết kế vỏ và kết nối. Sau đó sản xuất mẫu thử nghiệm để kiểm tra trước khi đi vào sản xuất hàng loạt.</p>
+          <div class="step-tags">
+            <span class="step-tag">Bản vẽ 2D/3D</span>
+            <span class="step-tag">BMS design</span>
+            <span class="step-tag">Mẫu thử nghiệm</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-dot"></div>
+        <div class="step-num-col"><span class="step-number">04</span></div>
+        <div class="step-content">
+          <h3 class="step-title">Kiểm tra, hiệu chỉnh & xác nhận</h3>
+          <p class="step-desc">Kiểm tra mẫu theo các tiêu chí an toàn, hiệu năng và độ bền. Hiệu chỉnh dựa trên phản hồi thực tế. Xác nhận kỹ thuật cuối cùng trước khi ký kết sản xuất.</p>
+          <div class="step-tags">
+            <span class="step-tag">Kiểm tra chu kỳ</span>
+            <span class="step-tag">Kiểm tra nhiệt độ</span>
+            <span class="step-tag">Kiểm tra an toàn</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-dot"></div>
+        <div class="step-num-col"><span class="step-number">05</span></div>
+        <div class="step-content">
+          <h3 class="step-title">Sản xuất</h3>
+          <p class="step-desc">Triển khai sản xuất tại nhà máy PKGBattery. Kiểm soát chất lượng từng lô hàng. Cập nhật tiến độ thường xuyên cho đối tác trong suốt quá trình sản xuất.</p>
+          <div class="step-tags">
+            <span class="step-tag">Kiểm soát lô hàng</span>
+            <span class="step-tag">Báo cáo tiến độ</span>
+            <span class="step-tag">QC từng công đoạn</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step reveal">
+        <div class="step-dot"></div>
+        <div class="step-num-col"><span class="step-number">06</span></div>
+        <div class="step-content">
+          <h3 class="step-title">Bàn giao & hỗ trợ sau sản xuất</h3>
+          <p class="step-desc">Bàn giao kèm tài liệu kỹ thuật, hướng dẫn vận hành. Hỗ trợ kỹ thuật sau bàn giao cho đơn hàng tiếp theo hoặc các vấn đề phát sinh trong quá trình vận hành.</p>
+          <div class="step-tags">
+            <span class="step-tag">Tài liệu kỹ thuật</span>
+            <span class="step-tag">Hỗ trợ sau bàn giao</span>
+            <span class="step-tag">Đơn hàng tiếp theo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLICATIONS -->
+<section id="applications">
+  <div class="container">
+    <div class="app-header">
+      <div>
+        <div class="section-eyebrow reveal">
+          <div class="eyebrow-line"></div>
+          <span class="eyebrow-text">Ứng dụng công nghiệp</span>
+        </div>
+        <h2 class="section-title reveal">Lĩnh vực nào<br>PKGBattery<br>đã phục vụ</h2>
+      </div>
+      <div>
+        <p class="section-desc reveal" style="color: var(--text-secondary); font-size: 15px; line-height: 1.8;">
+          Nếu thiết bị của bạn cần nguồn điện lithium công nghiệp — hãy chia sẻ bài toán. Chúng tôi sẽ tư vấn giải pháp phù hợp nhất cho từng ứng dụng cụ thể.
+        </p>
+      </div>
+    </div>
+
+    <div class="app-grid reveal">
+      <div class="app-item">
+        <span class="app-item-icon">🏭</span>
+        <div class="app-item-name">Xe nâng điện</div>
+        <p class="app-item-desc">Pack pin thay thế axit–chì, tương thích nhiều model xe nâng công nghiệp.</p>
+      </div>
+      <div class="app-item">
+        <span class="app-item-icon">🤖</span>
+        <div class="app-item-name">AGV & Robot công nghiệp</div>
+        <p class="app-item-desc">Pin tùy chỉnh cho xe tự hành AGV, robot phân loại hàng hoá trong kho.</p>
+      </div>
+      <div class="app-item">
+        <span class="app-item-icon">⚡</span>
+        <div class="app-item-name">Hệ thống lưu trữ năng lượng</div>
+        <p class="app-item-desc">ESS công nghiệp và thương mại, kết hợp điện mặt trời hoặc lưới điện.</p>
+      </div>
+      <div class="app-item">
+        <span class="app-item-icon">🔋</span>
+        <div class="app-item-name">UPS & Backup điện</div>
+        <p class="app-item-desc">Nguồn dự phòng cho hệ thống vận hành liên tục, không để gián đoạn.</p>
+      </div>
+      <div class="app-item">
+        <span class="app-item-icon">🚐</span>
+        <div class="app-item-name">Xe điện chuyên dụng</div>
+        <p class="app-item-desc">Pin cho xe điện nội bộ, sân bay, khu công nghiệp, xe tuần tra.</p>
+      </div>
+      <div class="app-item">
+        <span class="app-item-icon">📦</span>
+        <div class="app-item-name">Thiết bị lưu kho</div>
+        <p class="app-item-desc">Nguồn pin cho thiết bị vận chuyển hàng nội kho, pallet jack điện.</p>
+      </div>
+      <div class="app-item">
+        <span class="app-item-icon">🔧</span>
+        <div class="app-item-name">Thiết bị công nghiệp tùy chỉnh</div>
+        <p class="app-item-desc">Thiết bị đo lường, kiểm tra, thiết bị cầm tay công nghiệp cần nguồn ổn định.</p>
+      </div>
+      <div class="app-item">
+        <span class="app-item-icon">🎯</span>
+        <div class="app-item-name">Dự án đặc thù theo yêu cầu</div>
+        <p class="app-item-desc">Bài toán không có trong danh mục — chúng tôi vẫn sẵn sàng tư vấn và thiết kế.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACTORY -->
+<section id="factory">
+  <div class="container">
+    <div class="factory-header">
+      <div class="section-eyebrow" style="justify-content: center;">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text" style="color: rgba(212,43,43,0.8);">Nhà máy & con người</span>
+      </div>
+      <h2 class="section-title reveal">Năng lực thật —<br>nhà máy thật</h2>
+      <p class="section-desc reveal">Không phải thương mại thuần túy. PKGBattery có cơ sở sản xuất, có đội ngũ kỹ thuật, có dây chuyền kiểm tra — và sẵn sàng đón đối tác đến thăm quan bất cứ lúc nào.</p>
+    </div>
+
+    <div class="factory-gallery reveal">
+      <!-- Thay các placeholder dưới đây bằng ảnh thật của nhà máy -->
+      <div class="gallery-item">
+        <div class="gallery-img-placeholder gi-1">
+          <span class="gallery-placeholder-icon">🏗️</span>
+          <span class="gallery-placeholder-text">Ảnh: Toàn cảnh<br>nhà máy PKGBattery</span>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Nhà máy sản xuất</div>
+          <div class="gallery-caption-sub">Cơ sở tại Việt Nam</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img-placeholder gi-2">
+          <span class="gallery-placeholder-icon">⚙️</span>
+          <span class="gallery-placeholder-text">Ảnh: Dây chuyền<br>lắp ráp cell pin</span>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Dây chuyền lắp ráp</div>
+          <div class="gallery-caption-sub">Kiểm soát từng công đoạn</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img-placeholder gi-3">
+          <span class="gallery-placeholder-icon">🔬</span>
+          <span class="gallery-placeholder-text">Ảnh: Phòng R&amp;D<br>và kiểm tra kỹ thuật</span>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Khu vực R&amp;D</div>
+          <div class="gallery-caption-sub">Nghiên cứu và phát triển</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img-placeholder gi-4">
+          <span class="gallery-placeholder-icon">👨‍🔧</span>
+          <span class="gallery-placeholder-text">Ảnh: Kỹ sư<br>kiểm tra sản phẩm</span>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Đội ngũ kỹ thuật</div>
+          <div class="gallery-caption-sub">Kỹ sư trực tiếp thực hiện dự án</div>
+        </div>
+      </div>
+      <div class="gallery-item">
+        <div class="gallery-img-placeholder gi-5">
+          <span class="gallery-placeholder-icon">📋</span>
+          <span class="gallery-placeholder-text">Ảnh: Kiểm tra chất lượng<br>trước bàn giao</span>
+        </div>
+        <div class="gallery-overlay">
+          <div class="gallery-caption">Kiểm tra chất lượng</div>
+          <div class="gallery-caption-sub">QC trước khi xuất xưởng</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="factory-stats">
+      <div class="factory-stat reveal">
+        <div class="stat-value">100<span>+</span></div>
+        <div class="stat-label">Dự án OEM/ODM<br>đã thực hiện</div>
+        <div class="stat-note">* Số liệu tham chiếu, có thể cập nhật</div>
+      </div>
+      <div class="factory-stat reveal reveal-delay-1">
+        <div class="stat-value">20<span>+</span></div>
+        <div class="stat-label">Nhóm ứng dụng<br>công nghiệp khác nhau</div>
+        <div class="stat-note">* Số liệu tham chiếu, có thể cập nhật</div>
+      </div>
+      <div class="factory-stat reveal reveal-delay-2">
+        <div class="stat-value">48<span>V</span></div>
+        <div class="stat-label">đến 400V — dải điện áp<br>hỗ trợ sản xuất</div>
+        <div class="stat-note">* Tùy cấu hình theo yêu cầu</div>
+      </div>
+      <div class="factory-stat reveal">
+        <div class="stat-value">6<span>bước</span></div>
+        <div class="stat-label">Quy trình kiểm tra<br>chất lượng đầu ra</div>
+        <div class="stat-note">* Tham khảo quy trình hợp tác</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALITY -->
+<section id="quality">
+  <div class="container">
+    <div class="quality-inner">
+      <div class="quality-visual reveal">
+        <div class="quality-visual-bg"></div>
+        <div class="quality-checklist">
+          <div class="quality-check">
+            <div class="check-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
+            </div>
+            <span class="check-label">Kiểm soát nguồn linh kiện đầu vào</span>
+          </div>
+          <div class="quality-check">
+            <div class="check-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
+            </div>
+            <span class="check-label">Kiểm tra cấu hình kỹ thuật</span>
+          </div>
+          <div class="quality-check">
+            <div class="check-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
+            </div>
+            <span class="check-label">Kiểm tra an toàn điện hóa</span>
+          </div>
+          <div class="quality-check">
+            <div class="check-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
+            </div>
+            <span class="check-label">Kiểm tra hiệu năng và chu kỳ</span>
+          </div>
+          <div class="quality-check">
+            <div class="check-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
+            </div>
+            <span class="check-label">Kiểm tra toàn bộ trước bàn giao</span>
+          </div>
+          <div class="quality-check">
+            <div class="check-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M21 12c0 4.97-4.03 9-9 9S3 16.97 3 12 7.03 3 12 3s9 4.03 9 9z"/></svg>
+            </div>
+            <span class="check-label">Hỗ trợ chứng chỉ theo yêu cầu dự án</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quality-content">
+        <div class="section-eyebrow reveal">
+          <div class="eyebrow-line"></div>
+          <span class="eyebrow-text">Kiểm soát chất lượng</span>
+        </div>
+        <h2 class="section-title reveal">Pin an toàn —<br>không phải may rủi</h2>
+        <p class="section-desc reveal" style="margin-bottom: 40px;">Mỗi sản phẩm pin xuất xưởng từ PKGBattery đều trải qua quy trình kiểm tra nhiều bước — không có ngoại lệ.</p>
+
+        <div class="quality-points">
+          <div class="quality-point reveal">
+            <div class="qp-num">01</div>
+            <div>
+              <div class="qp-title">Kiểm soát đầu vào nghiêm ngặt</div>
+              <p class="qp-desc">Linh kiện và cell pin đầu vào được kiểm tra thông số kỹ thuật, xuất xứ, độ đồng đều trước khi đưa vào sản xuất.</p>
+            </div>
+          </div>
+          <div class="quality-point reveal">
+            <div class="qp-num">02</div>
+            <div>
+              <div class="qp-title">Kiểm tra từng công đoạn</div>
+              <p class="qp-desc">Lắp ráp cell, hàn kết nối, lập trình BMS, kiểm tra điện áp — từng bước đều có kiểm tra trước khi chuyển sang công đoạn tiếp theo.</p>
+            </div>
+          </div>
+          <div class="quality-point reveal">
+            <div class="qp-num">03</div>
+            <div>
+              <div class="qp-title">Kiểm tra cuối cùng trước xuất xưởng</div>
+              <p class="qp-desc">Kiểm tra toàn bộ thông số, sạc/xả thử, kiểm tra an toàn, đóng gói và xác nhận kỹ thuật trước khi bàn giao cho đối tác.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="container">
+    <div class="certs-header">
+      <div class="section-eyebrow reveal" style="justify-content: center;">
+        <div class="eyebrow-line"></div>
+        <span class="eyebrow-text">Chứng chỉ & đối tác</span>
+      </div>
+      <h2 class="section-title reveal" style="margin: 0 auto 16px; max-width: 400px;">Bằng chứng năng lực</h2>
+    </div>
+
+    <div class="certs-grid reveal">
+      <div class="cert-item">
+        <div class="cert-badge">ISO</div>
+        <div class="cert-name">ISO 9001</div>
+        <p class="cert-desc">Hệ thống quản lý chất lượng</p>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge">CE</div>
+        <div class="cert-name">CE Marking</div>
+        <p class="cert-desc">Tiêu chuẩn an toàn châu Âu</p>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge">UN</div>
+        <div class="cert-name">UN38.3</div>
+        <p class="cert-desc">Kiểm tra vận chuyển pin lithium</p>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge">MS</div>
+        <div class="cert-name">MSDS</div>
+        <p class="cert-desc">Dữ liệu an toàn vật liệu</p>
+      </div>
+      <div class="cert-item">
+        <div class="cert-badge">Ro</div>
+        <div class="cert-name">RoHS</div>
+        <p class="cert-desc">Hạn chế chất độc hại</p>
+      </div>
+    </div>
+
+    <p class="partners-note reveal">
+      PKGBattery đang đồng hành cùng nhiều đối tác trong các dự án pin công nghiệp, phân phối và sản xuất theo yêu cầu — trong và ngoài Việt Nam.
+      <br><br>
+      <span style="color: var(--text-muted); font-size: 13px;">Logo đối tác sẽ được cập nhật theo thỏa thuận hiển thị với từng bên.</span>
+    </p>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-bg-glow"></div>
+  <div class="container">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="section-eyebrow reveal">
+          <div class="eyebrow-line"></div>
+          <span class="eyebrow-text" style="color: rgba(212,43,43,0.8);">Tư vấn dự án</span>
+        </div>
+        <h2 class="section-title reveal">Bạn đang cần phát triển một sản phẩm pin riêng?</h2>
+
+        <p class="reveal" style="font-size: 15px; color: rgba(255,255,255,0.5); line-height: 1.8; margin-top: 24px; max-width: 400px;">
+          Hãy chia sẻ nhu cầu ứng dụng, thông số mong muốn hoặc bài toán vận hành. Đội ngũ PKGBattery sẽ tư vấn hướng cấu hình phù hợp trước khi báo giá.
+        </p>
+
+        <div class="contact-points">
+          <div class="contact-point reveal">
+            <div class="cp-dot"></div>
+            <span class="cp-text">Không cần biết đầy đủ thông số — cứ chia sẻ bài toán, chúng tôi cùng làm rõ.</span>
+          </div>
+          <div class="contact-point reveal">
+            <div class="cp-dot"></div>
+            <span class="cp-text">Tư vấn kỹ thuật ban đầu hoàn toàn miễn phí.</span>
+          </div>
+          <div class="contact-point reveal">
+            <div class="cp-dot"></div>
+            <span class="cp-text">Thời gian phản hồi trong vòng 1 ngày làm việc.</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 48px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.08);" class="reveal">
+          <div style="font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 12px;">Liên hệ trực tiếp</div>
+          <div style="font-family: var(--font-display); font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 8px;">
+            <a href="tel:+84000000000" style="color: inherit; text-decoration: none; transition: color 0.2s;"
+               onmouseover="this.style.color='#D42B2B'" onmouseout="this.style.color='white'">
+              0900 000 000
+            </a>
+          </div>
+          <div style="font-size: 13px; color: rgba(255,255,255,0.35);">
+            <a href="mailto:oem@pkgbattery.vn" style="color: inherit; text-decoration: none;">oem@pkgbattery.vn</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-right reveal">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Họ và tên *</label>
+              <input type="text" class="form-input" placeholder="Nguyễn Văn A">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số điện thoại *</label>
+              <input type="tel" class="form-input" placeholder="0900 000 000">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Doanh nghiệp / Tổ chức</label>
+            <input type="text" class="form-input" placeholder="Tên công ty của bạn">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Nhu cầu / Ứng dụng *</label>
+            <select class="form-select form-input">
+              <option value="" disabled selected>Chọn lĩnh vực ứng dụng</option>
+              <option>Xe nâng điện</option>
+              <option>AGV / Robot công nghiệp</option>
+              <option>Hệ thống lưu trữ năng lượng</option>
+              <option>UPS / Backup điện</option>
+              <option>Xe điện chuyên dụng</option>
+              <option>Thiết bị lưu kho</option>
+              <option>Thiết bị công nghiệp tùy chỉnh</option>
+              <option>Khác / Chưa rõ</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Mô tả yêu cầu</label>
+            <textarea class="form-textarea" placeholder="Mô tả ngắn về thiết bị, thông số cần thiết hoặc vấn đề kỹ thuật đang gặp phải..."></textarea>
+          </div>
+
+          <div class="file-upload">
+            📎 Đính kèm tài liệu kỹ thuật nếu có (bản vẽ, datasheet, v.v.)
+          </div>
+
+          <button class="form-submit">
+            Gửi yêu cầu tư vấn
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+
+          <p class="form-note">🔒 Thông tin của bạn chỉ được sử dụng cho mục đích tư vấn dự án.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-logo">PKG<span>Battery</span></div>
+      <ul class="footer-links">
+        <li><a href="#">Sản phẩm</a></li>
+        <li><a href="#">OEM/ODM</a></li>
+        <li><a href="#">Nhà máy</a></li>
+        <li><a href="#">Liên hệ</a></li>
+      </ul>
+      <div class="footer-copy">© 2025 PKGBattery. Sản xuất tại Việt Nam.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* Particle canvas */
+(function() {
+  const canvas = document.getElementById('particle-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let W, H;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * W,
+      y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.5,
+      alpha: Math.random() * 0.4 + 0.1
+    });
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W;
+      if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H;
+      if (p.y > H) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(212,43,43,${p.alpha})`;
+      ctx.fill();
+    });
+    /* Draw energy lines */
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 100) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(212,43,43,${0.08 * (1 - dist / 100)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* Scroll reveal */
+(function() {
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(el => io.observe(el));
+})();
+</script>
+</body>
+</html>

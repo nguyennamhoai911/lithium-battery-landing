@@ -1,0 +1,8 @@
+{
+  "name": "Liên hệ v1.0",
+  "description": "High-end B2B conversion page for PKGbattery - Vietnam's leading lithium battery and energy storage solution provider.",
+  "requestFramePermissions": [
+    "geolocation"
+  ],
+  "majorCapabilities": []
+}

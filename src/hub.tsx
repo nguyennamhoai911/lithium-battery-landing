@@ -35,6 +35,30 @@ interface Project {
   tags?: string[];
 }
 
+type FolderDropIntent = 'before' | 'after' | 'child';
+
+interface FolderDropState {
+  target: string;
+  intent: FolderDropIntent;
+}
+
+const FOLDER_SEPARATOR = ' / ';
+const UNCATEGORIZED = 'Uncategorized';
+const SIDEBAR_WIDTH_KEY = 'demo-hub-sidebar-width';
+const MIN_SIDEBAR_WIDTH = 220;
+const MAX_SIDEBAR_WIDTH = 420;
+
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
+const folderDepth = (path: string) => path.split(FOLDER_SEPARATOR).filter(Boolean).length - 1;
+const folderLabel = (path: string) => path.split(FOLDER_SEPARATOR).filter(Boolean).at(-1) || path;
+const parentFolder = (path: string) => {
+  const parts = path.split(FOLDER_SEPARATOR).filter(Boolean);
+  return parts.length > 1 ? parts.slice(0, -1).join(FOLDER_SEPARATOR) : null;
+};
+const isDescendantFolder = (path: string, ancestor: string) => path !== ancestor && path.startsWith(`${ancestor}${FOLDER_SEPARATOR}`);
+const isInFolder = (category: string, folder: string) => category === folder || isDescendantFolder(category, folder);
+const normalizeFolderName = (name: string) => name.trim().replace(/\s*\/\s*/g, FOLDER_SEPARATOR).replace(/\s+/g, ' ');
+
 const COLORS = ['bg-blue-500', 'bg-red-500', 'bg-green-500', 'bg-yellow-500', 'bg-purple-500', 'bg-neutral-500'];
 
 const EditableTitle = ({ title, onSave, small }: { title: string, onSave: (v: string) => void, small?: boolean }) => {
@@ -422,6 +446,13 @@ const Hub = () => {
   const [dropSuccessFolder, setDropSuccessFolder] = useState<string | null>(null);
   const [editingFolder, setEditingFolder] = useState<string | null>(null);
   const [editingFolderValue, setEditingFolderValue] = useState('');
+  const [draggingFolder, setDraggingFolder] = useState<string | null>(null);
+  const [folderDropState, setFolderDropState] = useState<FolderDropState | null>(null);
+  const [sidebarWidth, setSidebarWidth] = useState(() => {
+    const stored = Number(localStorage.getItem(SIDEBAR_WIDTH_KEY));
+    return Number.isFinite(stored) ? clamp(stored, MIN_SIDEBAR_WIDTH, MAX_SIDEBAR_WIDTH) : 280;
+  });
+  const [isResizingSidebar, setIsResizingSidebar] = useState(false);
 
   // Bulk Selection
   const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
@@ -437,6 +468,30 @@ const Hub = () => {
     }
     localStorage.setItem('theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    if (!isResizingSidebar) return;
+
+    const handlePointerMove = (event: PointerEvent) => {
+      const nextWidth = clamp(event.clientX, MIN_SIDEBAR_WIDTH, MAX_SIDEBAR_WIDTH);
+      setSidebarWidth(nextWidth);
+      localStorage.setItem(SIDEBAR_WIDTH_KEY, String(nextWidth));
+    };
+
+    const handlePointerUp = () => setIsResizingSidebar(false);
+
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    window.addEventListener('pointermove', handlePointerMove);
+    window.addEventListener('pointerup', handlePointerUp, { once: true });
+
+    return () => {
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+      window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerup', handlePointerUp);
+    };
+  }, [isResizingSidebar]);
 
   const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
 
@@ -505,26 +560,23 @@ const Hub = () => {
   };
 
   const addCategory = async () => {
-     const name = newFolderName.trim();
+     const name = normalizeFolderName(newFolderName);
      if (!name || categories.includes(name)) { setIsAddingFolder(false); setNewFolderName(''); return; }
      const newCats = [...categories, name];
      setCategories(newCats);
      setIsAddingFolder(false);
      setNewFolderName('');
      setActiveFolderFilter(name);
-     setIsSaving(true);
-     try { await fetch('/api/categories', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newCats) }); }
-     catch(e) {} finally { setTimeout(() => setIsSaving(false), 500); }
+     saveCategoriesRemote(newCats);
   };
 
   const deleteCategory = async (name: string) => {
-     const UNCATEGORIZED = 'Uncategorized';
-     const newCats = categories.filter(c => c !== name);
+     const newCats = categories.filter(c => c !== name && !isDescendantFolder(c, name));
      if (!newCats.includes(UNCATEGORIZED)) newCats.push(UNCATEGORIZED);
-     const newProjects = projects.map(p => p.category === name ? { ...p, category: UNCATEGORIZED } : p);
+     const newProjects = projects.map(p => isInFolder(p.category, name) ? { ...p, category: UNCATEGORIZED } : p);
      setCategories(newCats);
      setProjects(newProjects);
-     if (activeFolderFilter === name) setActiveFolderFilter(null);
+     if (activeFolderFilter && isInFolder(activeFolderFilter, name)) setActiveFolderFilter(null);
      setIsSaving(true);
      try {
        await Promise.all([
@@ -567,6 +619,18 @@ const Hub = () => {
     finally { setTimeout(() => setIsSaving(false), 500); }
   }
 
+  const saveCategoriesRemote = async (data: string[]) => {
+    setIsSaving(true);
+    try {
+      await fetch('/api/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    } catch (err) { }
+    finally { setTimeout(() => setIsSaving(false), 500); }
+  };
+
   const updateTitle = async (id: string, newTitle: string) => {
     const updated = projects.map(p => p.id === id ? { ...p, title: newTitle } : p);
     setProjects(updated);
@@ -585,25 +649,19 @@ const Hub = () => {
     const newCat = [...categories];
     [newCat[index], newCat[newIndex]] = [newCat[newIndex], newCat[index]];
     setCategories(newCat);
-    
-    setIsSaving(true);
-    try {
-      await fetch('/api/categories', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newCat)
-      });
-    } catch(err) { }
-    finally { setTimeout(() => setIsSaving(false), 500) }
+    saveCategoriesRemote(newCat);
   };
 
   const renameCategory = async (oldName: string, newName: string) => {
+    newName = normalizeFolderName(newName);
     if (oldName === newName) return;
-    const newCategories = categories.map(c => c === oldName ? newName : c);
+    if (!newName || (categories.includes(newName) && newName !== oldName)) return;
+    const newCategories = categories.map(c => c === oldName || isDescendantFolder(c, oldName) ? c.replace(oldName, newName) : c);
     setCategories(newCategories);
 
-    const newProjects = projects.map(p => p.category === oldName ? { ...p, category: newName } : p);
+    const newProjects = projects.map(p => isInFolder(p.category, oldName) ? { ...p, category: p.category.replace(oldName, newName) } : p);
     setProjects(newProjects);
+    if (activeFolderFilter && isInFolder(activeFolderFilter, oldName)) setActiveFolderFilter(activeFolderFilter.replace(oldName, newName));
 
     setIsSaving(true);
     try {
@@ -613,6 +671,50 @@ const Hub = () => {
       ]);
     } catch (err) {} finally { setTimeout(() => setIsSaving(false), 500); }
   };
+
+  const commitFolderChanges = (nextCategories: string[], nextProjects = projects) => {
+    setCategories(nextCategories);
+    setProjects(nextProjects);
+    setIsSaving(true);
+    Promise.all([
+      fetch('/api/categories', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(nextCategories) }),
+      fetch('/api/projects', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(nextProjects) })
+    ]).catch(() => {}).finally(() => setTimeout(() => setIsSaving(false), 500));
+  };
+
+  const moveFolder = (source: string, target: string, intent: FolderDropIntent) => {
+    if (source === target || (intent === 'child' && isInFolder(target, source))) return;
+
+    const sourceLabel = folderLabel(source);
+    const nextPath = intent === 'child' ? `${target}${FOLDER_SEPARATOR}${sourceLabel}` : source;
+    if (intent === 'child' && categories.includes(nextPath)) return;
+
+    const moving = categories.filter(c => c === source || isDescendantFolder(c, source));
+    const remaining = categories.filter(c => !moving.includes(c));
+    const renamedMoving = moving.map(c => c.replace(source, nextPath));
+    const targetIndex = remaining.indexOf(target);
+    if (targetIndex === -1) return;
+    const insertAt = intent === 'after' ? targetIndex + 1 : targetIndex;
+    const reordered = [
+      ...remaining.slice(0, insertAt),
+      ...renamedMoving,
+      ...remaining.slice(insertAt)
+    ];
+
+    const nextProjects = projects.map(project =>
+      isInFolder(project.category, source)
+        ? { ...project, category: project.category.replace(source, nextPath) }
+        : project
+    );
+
+    if (activeFolderFilter && isInFolder(activeFolderFilter, source)) {
+      setActiveFolderFilter(activeFolderFilter.replace(source, nextPath));
+    }
+
+    commitFolderChanges(reordered, nextProjects);
+  };
+
+  const makeFolderChild = (source: string, parent: string) => moveFolder(source, parent, 'child');
 
   const handleDragStart = (e: any) => setActiveId(e.active.id);
 
@@ -673,7 +775,7 @@ const Hub = () => {
 
   // Derive filtered array (respects folder + other filters + tags)
   const filteredProjects = projects.filter(p => {
-    if (activeFolderFilter !== null && p.category !== activeFolderFilter) return false;
+    if (activeFolderFilter !== null && !isInFolder(p.category, activeFolderFilter)) return false;
     if (ratingFilter > 0 && (p.rating || 0) < ratingFilter) return false;
     if (flagFilter === true && !p.flagged) return false;
     if (flagFilter === false && p.flagged) return false;
@@ -690,7 +792,6 @@ const Hub = () => {
     return acc;
   }, {} as Record<string, Project[]>);
 
-  const UNCATEGORIZED = 'Uncategorized';
   const sortedCategories = Object.keys(groupedProjects).sort((a, b) => {
     // Uncategorized always last
     if (a === UNCATEGORIZED) return 1;
@@ -704,7 +805,12 @@ const Hub = () => {
 
   // Count per folder (unfiltered by other criteria, just folder = category)
   const countByFolder = (cat: string | null) =>
-    cat === null ? projects.length : projects.filter(p => p.category === cat).length;
+    cat === null ? projects.length : projects.filter(p => isInFolder(p.category, cat)).length;
+
+  const visibleCategories = [
+    ...categories.filter(c => c !== UNCATEGORIZED),
+    ...(categories.includes(UNCATEGORIZED) ? [UNCATEGORIZED] : [])
+  ];
 
   const activeProject = activeId ? projects.find(p => p.id === activeId) : null;
 
@@ -713,7 +819,10 @@ const Hub = () => {
       <div className="min-h-screen bg-neutral-50 dark:bg-[#070707] text-neutral-900 dark:text-white flex font-sans selection:bg-blue-500/30 transition-colors duration-300">
 
         {/* === FOLDER SIDEBAR === */}
-        <aside className="w-60 shrink-0 border-r border-neutral-200 dark:border-neutral-800/60 bg-white dark:bg-[#0c0c0c] flex flex-col sticky top-0 h-screen overflow-y-auto">
+        <aside
+          style={{ width: sidebarWidth }}
+          className="relative shrink-0 border-r border-neutral-200 dark:border-neutral-800/60 bg-white dark:bg-[#0c0c0c] flex flex-col sticky top-0 h-screen overflow-y-auto"
+        >
           {/* Logo area */}
           <div className="px-5 py-5 border-b border-neutral-200 dark:border-neutral-800/60">
             <div className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-400 text-xs font-semibold uppercase tracking-wider">
@@ -743,27 +852,70 @@ const Hub = () => {
             <div className="my-2 border-t border-neutral-200 dark:border-neutral-800/60" />
 
             {/* Category folders */}
-            {[
-              ...categories.filter(c => c !== 'Uncategorized'),
-              ...(categories.includes('Uncategorized') ? ['DIVIDER', 'Uncategorized'] : [])
-            ].map(cat => {
-              if (cat === 'DIVIDER') return <div key="divider-uncat" className="my-2 border-t border-neutral-200 dark:border-neutral-800/60" />;
+            {visibleCategories.map((cat, catIndex) => {
               const isOver = dragOverFolder === cat;
               const isSuccess = dropSuccessFolder === cat;
+              const dropIntent = folderDropState?.target === cat ? folderDropState.intent : null;
+              const depth = folderDepth(cat);
+              const previousFolder = visibleCategories[catIndex - 1];
+              const canNestUnderPrevious = cat !== UNCATEGORIZED && previousFolder && previousFolder !== UNCATEGORIZED && !isInFolder(previousFolder, cat);
+              const parent = parentFolder(cat);
               return (
+              <React.Fragment key={cat}>
+              {cat === UNCATEGORIZED && catIndex > 0 && <div className="my-2 border-t border-neutral-200 dark:border-neutral-800/60" />}
               <div
-                key={cat}
-                className="group/folder relative flex items-center gap-1"
-                onDragOver={(e) => { e.preventDefault(); e.dataTransfer.dropEffect = 'move'; setDragOverFolder(cat); }}
-                onDragLeave={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setDragOverFolder(null); }}
-                onDrop={(e) => { e.preventDefault(); handleDropToFolder(cat); }}
+                draggable={cat !== UNCATEGORIZED}
+                onDragStart={(e) => {
+                  if (cat === UNCATEGORIZED) return;
+                  setDraggingFolder(cat);
+                  e.dataTransfer.effectAllowed = 'move';
+                  e.dataTransfer.setData('application/x-folder', cat);
+                }}
+                onDragEnd={() => { setDraggingFolder(null); setFolderDropState(null); }}
+                className={`group/folder relative flex items-center gap-1 ${draggingFolder === cat ? 'opacity-40' : ''}`}
+                onDragOver={(e) => {
+                  e.preventDefault();
+                  const folderSource = Array.from(e.dataTransfer.types).includes('application/x-folder');
+                  if (folderSource && draggingFolder && draggingFolder !== cat && !isInFolder(cat, draggingFolder)) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const offsetY = e.clientY - rect.top;
+                    const indentIntent = e.clientX - rect.left > 54 + depth * 14;
+                    const intent: FolderDropIntent = indentIntent ? 'child' : offsetY < rect.height / 2 ? 'before' : 'after';
+                    setFolderDropState({ target: cat, intent });
+                    return;
+                  }
+                  e.dataTransfer.dropEffect = 'move';
+                  setDragOverFolder(cat);
+                }}
+                onDragLeave={(e) => {
+                  if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                    setDragOverFolder(null);
+                    setFolderDropState(null);
+                  }
+                }}
+                onDrop={(e) => {
+                  e.preventDefault();
+                  const folderSource = e.dataTransfer.getData('application/x-folder');
+                  if (folderSource) {
+                    if (folderDropState && folderSource !== cat) moveFolder(folderSource, cat, folderDropState.intent);
+                    setDraggingFolder(null);
+                    setFolderDropState(null);
+                    return;
+                  }
+                  handleDropToFolder(cat);
+                }}
               >
+                {dropIntent === 'before' && <div className="absolute -top-1 left-3 right-8 h-0.5 rounded-full bg-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.8)]" />}
+                {dropIntent === 'after' && <div className="absolute -bottom-1 left-3 right-8 h-0.5 rounded-full bg-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.8)]" />}
                 <button
                   onClick={() => setActiveFolderFilter(cat)}
                   onDoubleClick={(e) => { e.stopPropagation(); setEditingFolder(cat); setEditingFolderValue(cat); }}
-                  className={`flex-1 flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 min-w-0 ${
+                  style={{ paddingLeft: 12 + depth * 14 }}
+                  className={`flex-1 flex items-center gap-2.5 pr-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 min-w-0 ${
                     isSuccess
                       ? 'bg-green-500/20 text-green-600 dark:text-green-300 border border-green-500/40 scale-[1.02]'
+                      : dropIntent === 'child'
+                        ? 'bg-blue-500/20 text-blue-600 dark:text-blue-200 border border-blue-400/60 scale-[1.02] shadow-lg shadow-blue-500/20'
                       : isOver
                         ? 'bg-purple-500/20 text-purple-600 dark:text-purple-200 border border-purple-400/60 scale-[1.02] shadow-lg shadow-purple-500/20'
                         : activeFolderFilter === cat
@@ -799,10 +951,15 @@ const Hub = () => {
                         className="w-full bg-transparent text-white outline-none border-b border-blue-500/60 text-sm font-medium"
                       />
                     ) : (
-                      <span className="truncate">{cat}</span>
+                      <span className="flex flex-col min-w-0" title={cat}>
+                        <span className="truncate">{folderLabel(cat)}</span>
+                        {parent && <span className="truncate text-[10px] font-medium opacity-50">{parent}</span>}
+                      </span>
                     )}
                   </span>
-                  {isOver ? (
+                  {dropIntent === 'child' ? (
+                    <span className="text-xs font-bold text-blue-300 shrink-0">Sub</span>
+                  ) : isOver ? (
                     <span className="text-xs font-bold text-purple-300 shrink-0 animate-pulse">Drop!</span>
                   ) : isSuccess ? (
                     <span className="text-xs font-bold text-green-400 shrink-0">✓</span>
@@ -810,6 +967,17 @@ const Hub = () => {
                     <span className="text-xs bg-neutral-100 dark:bg-neutral-700/60 text-neutral-500 dark:text-neutral-400 px-1.5 py-0.5 rounded-md font-mono shrink-0">{countByFolder(cat)}</span>
                   )}
                 </button>
+                {canNestUnderPrevious && (
+                  <button
+                    title={`Make child of ${folderLabel(previousFolder)}`}
+                    onClick={() => makeFolderChild(cat, previousFolder)}
+                    className="shrink-0 p-1.5 rounded-lg text-neutral-600 hover:text-blue-500 dark:hover:text-blue-300 hover:bg-blue-500/10 opacity-0 group-hover/folder:opacity-100 transition-all"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7v4a2 2 0 002 2h8m0 0l-3-3m3 3l-3 3" />
+                    </svg>
+                  </button>
+                )}
                 {/* Delete folder button */}
                 <button
                   title="Delete folder"
@@ -819,6 +987,7 @@ const Hub = () => {
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                 </button>
               </div>
+              </React.Fragment>
             )})}
 
             {/* Add folder inline input */}
@@ -901,6 +1070,16 @@ const Hub = () => {
               {isSaving ? '⏳ Saving...' : `${projects.length} templates total`}
             </div>
           </div>
+          <div
+            role="separator"
+            aria-orientation="vertical"
+            title="Drag to resize sidebar"
+            onPointerDown={(event) => {
+              event.preventDefault();
+              setIsResizingSidebar(true);
+            }}
+            className={`absolute top-0 right-0 h-full w-2 cursor-col-resize transition-colors ${isResizingSidebar ? 'bg-blue-500/40' : 'hover:bg-blue-500/20'}`}
+          />
         </aside>
 
         {/* === MAIN CONTENT === */}
@@ -909,8 +1088,11 @@ const Hub = () => {
           <header className="mb-8 border-b border-neutral-200 dark:border-neutral-800/50 pb-8 flex items-center justify-between">
             <div>
               <h2 className="text-3xl font-bold text-neutral-900 dark:text-white">
-                {activeFolderFilter ?? 'All Templates'}
+                {activeFolderFilter ? folderLabel(activeFolderFilter) : 'All Templates'}
               </h2>
+              {activeFolderFilter && parentFolder(activeFolderFilter) && (
+                <p className="text-neutral-400 mt-1 text-xs font-medium">{parentFolder(activeFolderFilter)}</p>
+              )}
               <p className="text-neutral-500 mt-1 text-sm">{filteredProjects.length} templates</p>
             </div>
           </header>
@@ -983,7 +1165,10 @@ const Hub = () => {
                   <div key={category} className="group/category mb-16">
                     <div className="flex items-center gap-3 mb-5">
                       <svg className="w-5 h-5 text-yellow-500 dark:text-yellow-400/70" viewBox="0 0 24 24" fill="currentColor"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" /></svg>
-                      <h3 className="text-lg font-semibold text-neutral-700 dark:text-neutral-300">{category}</h3>
+                      <div className="min-w-0">
+                        <h3 className="text-lg font-semibold text-neutral-700 dark:text-neutral-300 truncate">{folderLabel(category)}</h3>
+                        {parentFolder(category) && <p className="text-[11px] text-neutral-400 dark:text-neutral-600 truncate">{parentFolder(category)}</p>}
+                      </div>
                       <span className="text-xs text-neutral-500 dark:text-neutral-400 font-mono">{categoryItems.length}</span>
                       {catIndex !== -1 && (
                         <div className="flex bg-neutral-100 dark:bg-neutral-800/80 rounded border border-neutral-200 dark:border-neutral-700 opacity-0 group-hover/category:opacity-100 transition-opacity">
@@ -1050,7 +1235,7 @@ const Hub = () => {
             <div className="flex items-center gap-3">
                <select className="bg-neutral-50 dark:bg-black/50 border border-neutral-200 dark:border-neutral-700 text-sm font-medium text-neutral-900 dark:text-white rounded-lg px-3 py-2 outline-none focus:border-purple-500" onChange={(e) => { if (e.target.value) bulkMoveCategory(e.target.value); e.target.value = ""; }} defaultValue="">
                   <option value="" disabled>Move to Folder...</option>
-                  {categories.map(c => <option key={c} value={c}>{c}</option>)}
+                  {categories.map(c => <option key={c} value={c}>{`${'  '.repeat(folderDepth(c))}${folderLabel(c)}`}</option>)}
                </select>
                <button onClick={() => bulkToggleFlag(true)} className="px-4 py-2 rounded-lg bg-neutral-100 dark:bg-neutral-800 hover:bg-neutral-200 dark:hover:bg-neutral-700 text-sm font-semibold text-neutral-700 dark:text-white flex items-center gap-2 transition-colors border border-neutral-200 dark:border-neutral-700">
                   <svg className="w-4 h-4 text-red-600 dark:text-red-500" viewBox="0 0 24 24" fill="currentColor"><path fillRule="evenodd" d="M3 2.25a.75.75 0 01.75.75v.54l1.838-.46a9.75 9.75 0 016.725.738l.108.054a8.25 8.25 0 005.58.652l3.109-.732a.75.75 0 01.917.81 47.784 47.784 0 00.005 10.337.75.75 0 01-.836.886l-3.111-.732a9.75 9.75 0 01-6.585-.77l-.108-.054a8.25 8.25 0 00-5.58-.652l-1.838.46V21a.75.75 0 01-1.5 0V3A.75.75 0 013 2.25z" clipRule="evenodd" /></svg>

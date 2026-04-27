@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
+  
+  --color-brand-red: #E31E24;
+  --color-brand-black: #0F0F0F;
+  --color-brand-gray: #707070;
+  --color-brand-light-gray: #F5F5F7;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-brand-black bg-white antialiased selection:bg-brand-red/10 selection:text-brand-red;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-brand-black;
+  }
+
+  .article-content h2 {
+    @apply text-3xl md:text-4xl font-bold mt-16 mb-8 scroll-mt-24;
+  }
+
+  .article-content h3 {
+    @apply text-xl md:text-2xl font-semibold mt-12 mb-6 scroll-mt-24;
+  }
+
+  .article-content p {
+    @apply text-lg leading-[1.8] text-brand-black/80 mb-6;
+  }
+
+  .article-content ul {
+    @apply list-none mb-8 space-y-4;
+  }
+
+  .article-content li {
+    @apply relative pl-8 text-lg text-brand-black/80 before:content-[''] before:absolute before:left-0 before:top-3 before:w-2 before:h-2 before:bg-brand-red;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-gray/20 rounded-full hover:bg-brand-gray/40 transition-colors;
+  }
+}
+
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.mask-fade-in {
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}

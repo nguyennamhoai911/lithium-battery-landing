@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OEM/ODM Pin Lithium Công Nghiệp | PKGBattery</title>
+  <meta name="description" content="PKGBattery sản xuất pin lithium công nghiệp theo yêu cầu, hỗ trợ OEM/ODM, R&D, thiết kế pack pin, BMS, thử mẫu và sản xuất tại nhà máy riêng tại Việt Nam." />
+  <style>
+    :root{
+      --red:#d71920;
+      --red-2:#ff3b42;
+      --black:#08090b;
+      --charcoal:#121418;
+      --ink:#17191d;
+      --muted:#667085;
+      --line:#e6e8ec;
+      --soft:#f5f6f8;
+      --white:#ffffff;
+      --max:1180px;
+      --radius:28px;
+      --shadow:0 30px 90px rgba(8,9,11,.14);
+      --ease:cubic-bezier(.2,.8,.2,1);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 12% 4%, rgba(215,25,32,.08), transparent 28%),
+        linear-gradient(180deg,#fff 0%,#f7f8fa 52%,#fff 100%);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none}
+    button,input,textarea{font:inherit}
+    ::selection{background:rgba(215,25,32,.18)}
+
+    .noise,.energy-bg{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-2;
+    }
+    .noise{
+      opacity:.045;
+      background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.65'/%3E%3C/svg%3E");
+      z-index:-1;
+    }
+    .energy-bg:before{
+      content:"";
+      position:absolute;
+      width:46vw;height:46vw;
+      right:-18vw;top:8vh;
+      background:radial-gradient(circle, rgba(215,25,32,.11), transparent 58%);
+      filter:blur(12px);
+      animation:floatGlow 12s var(--ease) infinite alternate;
+    }
+    @keyframes floatGlow{to{transform:translate3d(-3vw,5vh,0) scale(1.08)}}
+
+    .container{width:min(var(--max), calc(100% - 48px));margin-inline:auto}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:10px;
+      font-size:12px;font-weight:760;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--red);
+    }
+    .eyebrow:before{content:"";width:34px;height:1px;background:var(--red)}
+    .section-title{
+      font-size:clamp(36px,5vw,72px);
+      line-height:.96;
+      letter-spacing:-.065em;
+      margin:18px 0 0;
+    }
+    .section-lead{
+      max-width:680px;
+      font-size:clamp(16px,1.5vw,19px);
+      line-height:1.75;
+      color:#5a616d;
+      margin:22px 0 0;
+    }
+    .btn{
+      border:0;cursor:pointer;
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      min-height:52px;padding:0 22px;border-radius:999px;
+      font-weight:760;letter-spacing:-.01em;
+      transition:transform .35s var(--ease), box-shadow .35s var(--ease), background .35s var(--ease), color .35s var(--ease);
+      position:relative;overflow:hidden;
+    }
+    .btn:after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(100deg,transparent,rgba(255,255,255,.32),transparent);
+      transform:translateX(-120%);
+      transition:transform .55s var(--ease);
+    }
+    .btn:hover:after{transform:translateX(120%)}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:var(--red);color:#fff;box-shadow:0 16px 34px rgba(215,25,32,.24)}
+    .btn-primary:hover{box-shadow:0 20px 44px rgba(215,25,32,.36)}
+    .btn-dark{background:#0c0d10;color:#fff}
+    .btn-ghost{background:#fff;color:#111;border:1px solid rgba(17,17,17,.12)}
+    .btn-line{background:transparent;color:#111;border:1px solid rgba(17,17,17,.14)}
+    .red-dot{width:7px;height:7px;border-radius:50%;background:var(--red);box-shadow:0 0 0 8px rgba(215,25,32,.08)}
+
+    header{
+      position:fixed;top:16px;left:0;right:0;z-index:50;
+      pointer-events:none;
+    }
+    .nav{
+      pointer-events:auto;
+      width:min(1240px, calc(100% - 32px));
+      margin:auto;
+      height:72px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 12px 0 22px;
+      border:1px solid rgba(12,13,16,.08);
+      background:rgba(255,255,255,.78);
+      backdrop-filter:blur(18px);
+      border-radius:999px;
+      box-shadow:0 16px 60px rgba(8,9,11,.08);
+    }
+    .brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:-.04em}
+    .brand-mark{
+      width:38px;height:38px;border-radius:14px;background:#08090b;position:relative;overflow:hidden;
+      box-shadow:inset 0 0 0 1px rgba(255,255,255,.12);
+    }
+    .brand-mark:before{content:"";position:absolute;inset:8px 10px;background:var(--red);clip-path:polygon(0 0,100% 0,78% 100%,0 100%)}
+    .nav-links{display:flex;gap:28px;font-size:14px;font-weight:680;color:#3f444d}
+    .nav-links a{position:relative}
+    .nav-links a:after{content:"";position:absolute;left:0;right:0;bottom:-8px;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:.3s var(--ease)}
+    .nav-links a:hover:after{transform:scaleX(1)}
+    .nav-cta{display:flex;gap:10px;align-items:center}
+
+    .hero{
+      min-height:920px;
+      padding:148px 0 90px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero:before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0) 0 54%, rgba(8,9,11,.96) 54% 100%),
+        radial-gradient(circle at 74% 31%, rgba(215,25,32,.20), transparent 24%);
+      z-index:-1;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.08fr) minmax(360px,.92fr);
+      gap:44px;
+      align-items:center;
+    }
+    .hero-copy{padding-top:36px;position:relative}
+    .hero h1{
+      max-width:790px;
+      margin:22px 0 0;
+      font-size:clamp(52px,7.3vw,104px);
+      line-height:.9;
+      letter-spacing:-.078em;
+      color:#08090b;
+    }
+    .hero h1 span{color:var(--red)}
+    .hero-sub{
+      max-width:650px;
+      font-size:clamp(17px,1.6vw,21px);
+      line-height:1.74;
+      color:#4e5561;
+      margin:28px 0 0;
+    }
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+    .trust-line{
+      margin-top:34px;
+      display:flex;gap:13px;align-items:flex-start;flex-wrap:wrap;
+      color:#59606b;font-size:14px;font-weight:640;
+    }
+    .trust-line span{display:inline-flex;gap:9px;align-items:center}
+    .hero-visual{
+      min-height:650px;
+      position:relative;
+      border-radius:44px 0 0 44px;
+      overflow:hidden;
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.10),transparent 38%),
+        radial-gradient(circle at 30% 20%,rgba(215,25,32,.36),transparent 24%),
+        linear-gradient(160deg,#181a20,#050608 72%);
+      box-shadow:-40px 40px 100px rgba(8,9,11,.32);
+    }
+    .hero-visual:before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(90deg,rgba(8,9,11,.16),rgba(8,9,11,.75)),
+        url("https://images.unsplash.com/photo-1581092921461-39b9d08a9b21?auto=format&fit=crop&w=1400&q=80") center/cover;
+      mix-blend-mode:screen;opacity:.42;
+      mask-image:linear-gradient(90deg,transparent 0%,#000 22%,#000 80%,transparent 100%);
+    }
+    .battery-pack{
+      position:absolute;left:7%;right:8%;bottom:12%;
+      height:310px;border-radius:34px;
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.18),rgba(255,255,255,.04)),
+        linear-gradient(160deg,#242831,#0b0d11);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 40px 80px rgba(0,0,0,.42), inset 0 0 0 1px rgba(255,255,255,.04);
+      transform:perspective(900px) rotateY(-9deg) rotateX(5deg);
+    }
+    .battery-pack:before{
+      content:"OEM / ODM";position:absolute;left:34px;top:32px;
+      color:#fff;font-size:13px;letter-spacing:.18em;font-weight:850;
+    }
+    .battery-pack:after{
+      content:"48V · BMS · INDUSTRIAL PACK";position:absolute;left:34px;bottom:30px;
+      color:rgba(255,255,255,.58);font-size:12px;letter-spacing:.12em;
+    }
+    .cell-lines{
+      position:absolute;inset:78px 34px 76px;
+      display:grid;grid-template-columns:repeat(6,1fr);gap:12px;
+    }
+    .cell-lines i{
+      border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.12),rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.08);
+      position:relative;overflow:hidden;
+    }
+    .cell-lines i:after{
+      content:"";position:absolute;left:0;right:0;bottom:0;height:32%;
+      background:linear-gradient(180deg,transparent,rgba(215,25,32,.55));
+      animation:pulseCell 2.8s var(--ease) infinite alternate;
+      animation-delay:calc(var(--i)*.16s);
+    }
+    @keyframes pulseCell{to{height:68%;opacity:.82}}
+    .energy-line{
+      position:absolute;height:2px;width:72%;left:8%;top:28%;
+      background:linear-gradient(90deg,transparent,var(--red),rgba(255,255,255,.8),transparent);
+      box-shadow:0 0 28px rgba(215,25,32,.62);
+      animation:lineMove 4s linear infinite;
+    }
+    @keyframes lineMove{to{transform:translateX(28%);opacity:.5}}
+
+    section{position:relative;padding:120px 0}
+    .split-head{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:end;margin-bottom:64px}
+    .reason-wrap{
+      display:grid;grid-template-columns:.84fr 1.16fr;gap:70px;align-items:start;
+    }
+    .large-statement{
+      position:sticky;top:130px;
+      font-size:clamp(32px,4.5vw,66px);
+      line-height:.98;letter-spacing:-.06em;font-weight:900;
+    }
+    .large-statement strong{color:var(--red)}
+    .reason-line{position:relative;padding-left:46px}
+    .reason-line:before{
+      content:"";position:absolute;left:12px;top:0;bottom:0;width:1px;
+      background:linear-gradient(180deg,var(--red),rgba(215,25,32,.12),transparent);
+    }
+    .reason{
+      position:relative;
+      padding:0 0 38px 26px;
+      transition:.35s var(--ease);
+    }
+    .reason:before{
+      content:attr(data-no);
+      position:absolute;left:-48px;top:0;width:48px;height:48px;border-radius:50%;
+      display:grid;place-items:center;background:#fff;border:1px solid rgba(215,25,32,.28);
+      color:var(--red);font-weight:900;font-size:13px;
+      box-shadow:0 0 0 8px rgba(215,25,32,.045);
+    }
+    .reason h3{margin:0;font-size:26px;letter-spacing:-.035em}
+    .reason p{margin:12px 0 0;color:#626976;line-height:1.7;font-size:16px}
+    .reason:hover{transform:translateX(8px)}
+    .reason:hover h3{color:var(--red)}
+
+    .capability{
+      background:
+        radial-gradient(circle at 8% 18%,rgba(215,25,32,.07),transparent 28%),
+        linear-gradient(180deg,#f5f6f8,#fff);
+      overflow:hidden;
+    }
+    .capability:before{
+      content:"";position:absolute;inset:0;
+      background-image:linear-gradient(rgba(8,9,11,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(8,9,11,.04) 1px,transparent 1px);
+      background-size:54px 54px;
+      mask-image:linear-gradient(180deg,transparent,#000 18%,#000 70%,transparent);
+      pointer-events:none;
+    }
+    .flow{
+      position:relative;
+      display:grid;grid-template-columns:1fr 1fr 1fr;
+      gap:18px;margin-top:46px;
+    }
+    .flow:before{
+      content:"";position:absolute;left:8%;right:8%;top:50%;height:2px;
+      background:linear-gradient(90deg,transparent,rgba(215,25,32,.55),transparent);
+    }
+    .flow-item{
+      min-height:250px;padding:28px;border-radius:34px;
+      background:rgba(255,255,255,.72);backdrop-filter:blur(12px);
+      border:1px solid rgba(8,9,11,.08);
+      box-shadow:0 24px 70px rgba(8,9,11,.06);
+      transform:translateY(var(--shift));
+      position:relative;overflow:hidden;
+      transition:.45s var(--ease);
+    }
+    .flow-item:after{
+      content:"";position:absolute;inset:auto 24px 0;height:3px;background:var(--red);
+      transform:scaleX(.16);transform-origin:left;transition:.45s var(--ease);
+    }
+    .flow-item:hover{transform:translateY(calc(var(--shift) - 10px));box-shadow:0 30px 90px rgba(8,9,11,.12)}
+    .flow-item:hover:after{transform:scaleX(1)}
+    .flow-item b{display:block;color:var(--red);font-size:13px;letter-spacing:.13em;text-transform:uppercase}
+    .flow-item h3{font-size:25px;letter-spacing:-.04em;margin:34px 0 12px}
+    .flow-item p{color:#626976;line-height:1.65;margin:0}
+
+    .process{
+      background:linear-gradient(180deg,#fff 0%,#121418 36%,#07080a 100%);
+      color:#fff;
+      overflow:hidden;
+    }
+    .process .section-lead{color:rgba(255,255,255,.66)}
+    .timeline{max-width:980px;margin:68px auto 0;position:relative}
+    .timeline:before{
+      content:"";position:absolute;left:50%;top:0;bottom:0;width:1px;
+      background:linear-gradient(180deg,rgba(215,25,32,.9),rgba(255,255,255,.14));
+    }
+    .step{
+      width:50%;padding:0 54px 54px 0;position:relative;
+      opacity:.55;transform:translateY(26px);transition:.7s var(--ease);
+    }
+    .step:nth-child(even){margin-left:50%;padding:0 0 54px 54px}
+    .step:before{
+      content:attr(data-step);position:absolute;right:-23px;top:0;width:46px;height:46px;border-radius:50%;
+      display:grid;place-items:center;background:#111318;border:1px solid rgba(215,25,32,.52);color:#fff;font-weight:900;
+      box-shadow:0 0 0 8px rgba(215,25,32,.08);
+    }
+    .step:nth-child(even):before{left:-23px;right:auto}
+    .step.is-visible{opacity:1;transform:translateY(0)}
+    .step h3{margin:4px 0 10px;font-size:26px;letter-spacing:-.035em}
+    .step p{margin:0;color:rgba(255,255,255,.66);line-height:1.7}
+
+    .cluster{
+      min-height:720px;display:grid;place-items:center;position:relative;margin-top:20px;
+    }
+    .core{
+      width:min(420px,70vw);aspect-ratio:1;border-radius:50%;
+      display:grid;place-items:center;text-align:center;padding:48px;
+      background:radial-gradient(circle at 35% 30%,#30343d,#08090b 72%);
+      color:#fff;box-shadow:0 50px 120px rgba(8,9,11,.28), inset 0 0 0 1px rgba(255,255,255,.1);
+      position:relative;z-index:2;
+    }
+    .core h3{font-size:38px;line-height:1;letter-spacing:-.055em;margin:0}
+    .core p{color:rgba(255,255,255,.64);line-height:1.55;margin:16px 0 0}
+    .app{
+      position:absolute;width:210px;min-height:92px;border-radius:999px;
+      display:flex;align-items:center;gap:12px;padding:16px 18px;
+      background:#fff;border:1px solid rgba(8,9,11,.08);box-shadow:0 22px 70px rgba(8,9,11,.08);
+      transition:.45s var(--ease);
+    }
+    .app small{display:block;color:#767d88;margin-top:4px;line-height:1.35}
+    .app:hover{transform:translateY(-8px) scale(1.03);border-color:rgba(215,25,32,.32);box-shadow:0 28px 90px rgba(215,25,32,.12)}
+    .app:nth-of-type(1){left:2%;top:13%}.app:nth-of-type(2){right:4%;top:10%}.app:nth-of-type(3){left:12%;bottom:16%}.app:nth-of-type(4){right:14%;bottom:12%}
+    .app:nth-of-type(5){left:1%;top:48%}.app:nth-of-type(6){right:0;top:46%}.app:nth-of-type(7){left:32%;top:0}.app:nth-of-type(8){right:32%;bottom:0}
+
+    .factory{
+      background:#07080a;color:#fff;overflow:hidden;
+    }
+    .factory:before{
+      content:"";position:absolute;inset:0;
+      background:
+        linear-gradient(90deg,#07080a 0 18%,rgba(7,8,10,.38),#07080a 92%),
+        url("https://images.unsplash.com/photo-1581093458791-9d42cc0305a5?auto=format&fit=crop&w=1800&q=80") center/cover;
+      opacity:.32;
+    }
+    .factory .container{position:relative}
+    .factory .section-lead{color:rgba(255,255,255,.68)}
+    .gallery{
+      margin-top:62px;display:grid;grid-template-columns:1.15fr .85fr 1fr;grid-template-rows:250px 210px;gap:18px;
+    }
+    .shot{
+      position:relative;border-radius:32px;overflow:hidden;background:#191c22;border:1px solid rgba(255,255,255,.1);
+      min-height:200px;box-shadow:0 28px 80px rgba(0,0,0,.32);
+    }
+    .shot:nth-child(1){grid-row:span 2}.shot:nth-child(3){grid-row:span 2}
+    .shot:before{
+      content:"";position:absolute;inset:0;background:var(--img) center/cover;opacity:.74;transition:.6s var(--ease);
+    }
+    .shot:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.78))}
+    .shot:hover:before{transform:scale(1.08);opacity:.94}
+    .caption{position:absolute;left:22px;right:22px;bottom:18px;z-index:2;font-size:14px;color:rgba(255,255,255,.82)}
+    .caption b{display:block;color:#fff;font-size:16px;margin-bottom:5px}
+
+    .quality-grid{
+      display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:center;
+    }
+    .lab-panel{
+      min-height:560px;border-radius:42px;background:
+        radial-gradient(circle at 70% 20%,rgba(215,25,32,.2),transparent 24%),
+        linear-gradient(150deg,#111318,#050608);
+      position:relative;overflow:hidden;box-shadow:var(--shadow);
+    }
+    .lab-panel:before{
+      content:"";position:absolute;inset:36px;border:1px solid rgba(255,255,255,.12);border-radius:30px;
+      background-image:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);
+      background-size:42px 42px;
+    }
+    .meter{
+      position:absolute;left:56px;right:56px;bottom:60px;
+      display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+    }
+    .meter div{height:120px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.03));position:relative;overflow:hidden}
+    .meter div:after{content:"";position:absolute;left:0;right:0;bottom:0;height:var(--h);background:linear-gradient(180deg,rgba(215,25,32,.15),rgba(215,25,32,.72))}
+    .checks{display:grid;gap:16px}
+    .check{
+      padding:24px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:58px 1fr;gap:16px;align-items:start;
+    }
+    .check strong{font-size:21px;letter-spacing:-.035em}
+    .check p{margin:7px 0 0;color:#626976;line-height:1.65}
+    .stats{
+      margin-top:34px;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:28px;overflow:hidden;border:1px solid var(--line);
+    }
+    .stat{background:#fff;padding:24px}
+    .stat b{font-size:30px;letter-spacing:-.055em}
+    .stat span{display:block;margin-top:8px;color:#69717c;font-size:13px;line-height:1.45}
+
+    .certs{background:#f6f7f9}
+    .cert-row{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:48px}
+    .cert{
+      min-height:170px;border-radius:28px;background:#fff;border:1px solid rgba(8,9,11,.08);
+      padding:24px;display:flex;flex-direction:column;justify-content:space-between;
+      transition:.35s var(--ease);
+    }
+    .cert:hover{transform:translateY(-6px);border-color:rgba(215,25,32,.34);box-shadow:0 20px 70px rgba(8,9,11,.08)}
+    .cert b{font-size:25px;letter-spacing:-.04em;filter:grayscale(1)}
+    .cert span{color:#6b7280;font-size:13px;line-height:1.45}
+    .partner-strip{
+      margin-top:22px;border-radius:28px;border:1px solid rgba(8,9,11,.08);background:#fff;padding:18px;
+      display:grid;grid-template-columns:repeat(6,1fr);gap:10px;
+    }
+    .logo-ph{
+      height:74px;border-radius:20px;background:#f3f4f6;display:grid;place-items:center;color:#8a919d;font-weight:850;font-size:13px;
+      transition:.3s var(--ease);
+    }
+    .logo-ph:hover{color:var(--red);background:#fff;box-shadow:inset 0 0 0 1px rgba(215,25,32,.22)}
+
+    .consult{
+      padding:130px 0;
+      background:
+        radial-gradient(circle at 20% 20%,rgba(215,25,32,.32),transparent 24%),
+        radial-gradient(circle at 86% 70%,rgba(215,25,32,.16),transparent 28%),
+        linear-gradient(145deg,#14161b,#060709);
+      color:#fff;
+    }
+    .consult-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:58px;align-items:start}
+    .consult .section-lead{color:rgba(255,255,255,.68)}
+    .contact-card{
+      border-radius:40px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(18px);padding:30px;box-shadow:0 34px 90px rgba(0,0,0,.28);
+    }
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .field{display:flex;flex-direction:column;gap:8px}
+    .field.full{grid-column:1/-1}
+    label{font-size:13px;color:rgba(255,255,255,.66)}
+    input,textarea{
+      width:100%;border:1px solid rgba(255,255,255,.14);border-radius:18px;
+      background:rgba(255,255,255,.08);color:#fff;padding:15px 16px;outline:0;
+      transition:.25s var(--ease);
+    }
+    textarea{min-height:124px;resize:vertical}
+    input:focus,textarea:focus{border-color:rgba(255,59,66,.75);box-shadow:0 0 0 4px rgba(215,25,32,.14)}
+    input::placeholder,textarea::placeholder{color:rgba(255,255,255,.34)}
+    .upload{
+      border:1px dashed rgba(255,255,255,.22);border-radius:22px;padding:18px;color:rgba(255,255,255,.62);
+      display:flex;justify-content:space-between;align-items:center;gap:12px;
+    }
+    .note{color:rgba(255,255,255,.52);font-size:13px;line-height:1.55;margin-top:16px}
+
+    footer{background:#050608;color:rgba(255,255,255,.58);padding:28px 0;border-top:1px solid rgba(255,255,255,.08)}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center;font-size:13px}
+
+    .reveal{opacity:0;transform:translateY(32px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
+    .reveal.is-visible{opacity:1;transform:translateY(0)}
+
+    @media (max-width:980px){
+      .nav-links{display:none}
+      .hero{padding-top:120px;min-height:auto}
+      .hero:before{background:linear-gradient(180deg,rgba(255,255,255,0) 0 52%,rgba(8,9,11,.96) 52% 100%)}
+      .hero-grid,.reason-wrap,.split-head,.quality-grid,.consult-grid{grid-template-columns:1fr}
+      .hero-visual{min-height:540px;border-radius:36px}
+      .large-statement{position:relative;top:auto}
+      .flow{grid-template-columns:1fr}
+      .flow:before{display:none}
+      .flow-item{transform:none}
+      .timeline:before{left:22px}
+      .step,.step:nth-child(even){width:100%;margin-left:0;padding:0 0 42px 68px}
+      .step:before,.step:nth-child(even):before{left:0;right:auto}
+      .cluster{display:grid;gap:14px;place-items:stretch;min-height:auto}
+      .core{width:100%;border-radius:34px;aspect-ratio:auto}
+      .app{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:100%;border-radius:26px}
+      .gallery{grid-template-columns:1fr;grid-template-rows:auto}
+      .shot,.shot:nth-child(1),.shot:nth-child(3){grid-row:auto;min-height:260px}
+      .stats,.cert-row,.partner-strip{grid-template-columns:1fr 1fr}
+    }
+    @media (max-width:640px){
+      .container{width:min(100% - 28px,var(--max))}
+      header{top:10px}.nav{height:64px;width:calc(100% - 20px);padding-left:14px}
+      .nav-cta .btn-ghost{display:none}
+      .btn{min-height:48px;padding:0 17px}
+      section{padding:86px 0}
+      .hero h1{font-size:52px}
+      .hero-actions{flex-direction:column}.hero-actions .btn{width:100%}
+      .hero-visual{min-height:430px}
+      .battery-pack{left:4%;right:4%;height:250px}
+      .cell-lines{grid-template-columns:repeat(3,1fr)}
+      .form-grid,.stats,.cert-row,.partner-strip{grid-template-columns:1fr}
+      .footer-inner{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+  <div class="energy-bg"></div>
+  <div class="noise"></div>
+
+  <header>
+    <nav class="nav">
+      <a class="brand" href="#top" aria-label="PKGBattery">
+        <span class="brand-mark"></span>
+        <span>PKGBattery</span>
+      </a>
+      <div class="nav-links">
+        <a href="#ly-do">Lý do chọn</a>
+        <a href="#nang-luc">Năng lực</a>
+        <a href="#quy-trinh">Quy trình</a>
+        <a href="#nha-may">Nhà máy</a>
+        <a href="#tu-van">Tư vấn</a>
+      </div>
+      <div class="nav-cta">
+        <a class="btn btn-ghost" href="tel:0900000000">Gọi tư vấn</a>
+        <a class="btn btn-primary" href="#tu-van">Gửi yêu cầu</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <span class="eyebrow">OEM / ODM lithium battery</span>
+          <h1>Sản xuất pin lithium công nghiệp <span>theo yêu cầu</span> cho doanh nghiệp</h1>
+          <p class="hero-sub">PKGBattery đồng hành từ tư vấn kỹ thuật, thiết kế giải pháp, thử mẫu đến sản xuất hoàn thiện tại nhà máy riêng tại Việt Nam.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="tel:0900000000">Gọi tư vấn dự án</a>
+            <a class="btn btn-line" href="#tu-van">Gửi yêu cầu thiết kế</a>
+          </div>
+          <div class="trust-line" aria-label="Điểm tin cậy">
+            <span><i class="red-dot"></i> Nhà máy riêng</span>
+            <span><i class="red-dot"></i> Hỗ trợ R&D</span>
+            <span><i class="red-dot"></i> Thiết kế theo yêu cầu</span>
+            <span><i class="red-dot"></i> Kiểm soát đầu vào – đầu ra</span>
+          </div>
+        </div>
+        <div class="hero-visual reveal" aria-label="Hình ảnh kỹ thuật pin lithium công nghiệp">
+          <div class="energy-line"></div>
+          <div class="battery-pack">
+            <div class="cell-lines">
+              <i style="--i:1"></i><i style="--i:2"></i><i style="--i:3"></i><i style="--i:4"></i><i style="--i:5"></i><i style="--i:6"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="ly-do">
+      <div class="container reason-wrap">
+        <div class="large-statement reveal">Doanh nghiệp B2B cần một đối tác <strong>có năng lực thật</strong>, không chỉ là nhà cung cấp linh kiện.</div>
+        <div class="reason-line">
+          <article class="reason reveal" data-no="01">
+            <h3>Nhà máy riêng tại Việt Nam</h3>
+            <p>Giúp khách hàng chủ động hơn về tiến độ, trao đổi kỹ thuật, thử mẫu, kiểm tra chất lượng và điều chỉnh theo yêu cầu thực tế.</p>
+          </article>
+          <article class="reason reveal" data-no="02">
+            <h3>Mạnh về full product manufacturing</h3>
+            <p>PKGBattery không chỉ cung cấp cell hoặc linh kiện rời, mà hỗ trợ phát triển pack pin hoàn chỉnh cho ứng dụng công nghiệp.</p>
+          </article>
+          <article class="reason reveal" data-no="03">
+            <h3>Thiết kế theo bài toán vận hành</h3>
+            <p>Cấu hình pin được tư vấn theo điện áp, dung lượng, dòng xả, không gian lắp đặt, điều kiện sử dụng và mục tiêu kinh doanh.</p>
+          </article>
+          <article class="reason reveal" data-no="04">
+            <h3>Đội ngũ kỹ thuật đồng hành</h3>
+            <p>Từ tiếp nhận yêu cầu, đề xuất cấu hình, thử mẫu đến hiệu chỉnh, đội ngũ kỹ thuật luôn tham gia để giảm rủi ro triển khai.</p>
+          </article>
+          <article class="reason reveal" data-no="05">
+            <h3>Kiểm soát đầu vào – đầu ra</h3>
+            <p>Quy trình kiểm tra nhiều bước giúp sản phẩm ổn định hơn trước khi bàn giao cho đối tác, nhà máy hoặc kênh phân phối.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="nang-luc" class="capability">
+      <div class="container">
+        <div class="split-head">
+          <div class="reveal">
+            <span class="eyebrow">Năng lực OEM/ODM</span>
+            <h2 class="section-title">Từ ý tưởng sản phẩm đến pack pin hoàn thiện.</h2>
+          </div>
+          <p class="section-lead reveal">PKGBattery hỗ trợ các doanh nghiệp cần phát triển sản phẩm pin riêng, cấu hình riêng, thương hiệu riêng hoặc giải pháp pin phù hợp với thiết bị công nghiệp đặc thù.</p>
+        </div>
+        <div class="flow">
+          <article class="flow-item reveal" style="--shift:18px">
+            <b>Phân tích ứng dụng</b>
+            <h3>Tư vấn cấu hình pin theo thiết bị</h3>
+            <p>Đánh giá điện áp, dung lượng, dòng xả, chu kỳ sử dụng, môi trường vận hành và yêu cầu an toàn.</p>
+          </article>
+          <article class="flow-item reveal" style="--shift:-18px">
+            <b>Thiết kế kỹ thuật</b>
+            <h3>Thiết kế pack pin, kết cấu và BMS</h3>
+            <p>Tùy chỉnh kích thước, vỏ, layout cell, giao tiếp, BMS, đầu nối và các chi tiết lắp đặt.</p>
+          </article>
+          <article class="flow-item reveal" style="--shift:26px">
+            <b>Private label</b>
+            <h3>Tùy chỉnh thương hiệu và bao bì</h3>
+            <p>Hỗ trợ sản phẩm riêng cho chủ thương hiệu, nhà phân phối hoặc đối tác cần dòng sản phẩm độc quyền.</p>
+          </article>
+          <article class="flow-item reveal" style="--shift:-6px">
+            <b>Prototype</b>
+            <h3>Sản xuất mẫu và hiệu chỉnh</h3>
+            <p>Thử nghiệm thực tế, ghi nhận phản hồi kỹ thuật và điều chỉnh cấu hình trước khi sản xuất hàng loạt.</p>
+          </article>
+          <article class="flow-item reveal" style="--shift:22px">
+            <b>Manufacturing</b>
+            <h3>Sản xuất hàng loạt tại nhà máy</h3>
+            <p>Triển khai theo quy trình kiểm soát, phù hợp với đơn hàng dự án, kênh phân phối hoặc nhu cầu vận hành.</p>
+          </article>
+          <article class="flow-item reveal" style="--shift:-14px">
+            <b>Support</b>
+            <h3>Hỗ trợ sau sản xuất</h3>
+            <p>Đồng hành về tài liệu kỹ thuật, hướng dẫn sử dụng, kiểm tra và tối ưu theo phản hồi dự án.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="quy-trinh" class="process">
+      <div class="container">
+        <span class="eyebrow">Quy trình hợp tác</span>
+        <h2 class="section-title reveal">Rõ từng bước để doanh nghiệp dễ ra quyết định.</h2>
+        <p class="section-lead reveal">Quy trình được thiết kế để khách hàng B2B hiểu nhanh việc cần chuẩn bị, cách PKGBattery tư vấn và cách dự án đi từ yêu cầu ban đầu đến sản xuất.</p>
+        <div class="timeline">
+          <article class="step" data-step="01"><h3>Tiếp nhận nhu cầu</h3><p>Ghi nhận ứng dụng, thông số mong muốn, điều kiện vận hành, sản lượng dự kiến và các ràng buộc kỹ thuật.</p></article>
+          <article class="step" data-step="02"><h3>Tư vấn kỹ thuật</h3><p>Đội ngũ PKGBattery đề xuất hướng cấu hình, vật liệu, BMS, kết cấu và phương án triển khai phù hợp.</p></article>
+          <article class="step" data-step="03"><h3>Thiết kế cấu hình / bản mẫu</h3><p>Phát triển cấu hình pin, layout pack, vỏ, đầu nối, giao tiếp và các yêu cầu nhận diện nếu có.</p></article>
+          <article class="step" data-step="04"><h3>Kiểm tra và hiệu chỉnh</h3><p>Thử nghiệm mẫu, đo hiệu năng, đánh giá độ ổn định, ghi nhận phản hồi và tối ưu trước sản xuất.</p></article>
+          <article class="step" data-step="05"><h3>Sản xuất</h3><p>Triển khai sản xuất theo kế hoạch, kiểm soát đầu vào – đầu ra và chuẩn hóa quy trình bàn giao.</p></article>
+          <article class="step" data-step="06"><h3>Bàn giao và hỗ trợ</h3><p>Cung cấp tài liệu, hướng dẫn, hỗ trợ kỹ thuật và đồng hành sau sản xuất theo nhu cầu dự án.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="ung-dung">
+      <div class="container">
+        <div class="split-head">
+          <div class="reveal">
+            <span class="eyebrow">Ứng dụng công nghiệp</span>
+            <h2 class="section-title">Một nền tảng pin cho nhiều bài toán vận hành.</h2>
+          </div>
+          <p class="section-lead reveal">Từ thiết bị nâng hạ, tự động hóa, lưu kho, xe điện chuyên dụng đến hệ thống năng lượng, PKGBattery tùy chỉnh giải pháp theo ứng dụng thực tế.</p>
+        </div>
+        <div class="cluster">
+          <div class="core reveal"><div><h3>Industrial Lithium Battery Platform</h3><p>Lõi giải pháp pin lithium công nghiệp có thể tùy biến theo cấu hình, kết cấu và thương hiệu.</p></div></div>
+          <div class="app reveal"><i class="red-dot"></i><div><b>Xe nâng điện</b><small>Pin lithium cho vận hành kho, nhà máy, logistics.</small></div></div>
+          <div class="app reveal"><i class="red-dot"></i><div><b>AGV / robot</b><small>Giải pháp pin cho tự động hóa và robot công nghiệp.</small></div></div>
+          <div class="app reveal"><i class="red-dot"></i><div><b>Thiết bị lưu kho</b><small>Pin tùy chỉnh cho thiết bị vận hành trong kho.</small></div></div>
+          <div class="app reveal"><i class="red-dot"></i><div><b>Hệ thống năng lượng</b><small>Pack pin cho ESS, lưu trữ và trạm năng lượng.</small></div></div>
+          <div class="app reveal"><i class="red-dot"></i><div><b>UPS / backup</b><small>Nguồn dự phòng cho hệ thống cần độ ổn định cao.</small></div></div>
+          <div class="app reveal"><i class="red-dot"></i><div><b>Xe điện chuyên dụng</b><small>Pin cho xe điện du lịch, xe công nghiệp nhẹ.</small></div></div>
+          <div class="app reveal"><i class="red-dot"></i><div><b>Thiết bị tùy chỉnh</b><small>Thiết kế theo không gian lắp đặt và dòng tải riêng.</small></div></div>
+          <div class="app reveal"><i class="red-dot"></i><div><b>Dự án đặc thù</b><small>Phối hợp R&D cho sản phẩm chưa có sẵn trên thị trường.</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nha-may" class="factory">
+      <div class="container">
+        <span class="eyebrow">Nhà máy & con người</span>
+        <h2 class="section-title reveal">Niềm tin B2B đến từ những gì có thể kiểm chứng.</h2>
+        <p class="section-lead reveal">Khu vực kỹ thuật, quy trình lắp ráp, kiểm tra chất lượng và đội ngũ thực hiện dự án là những bằng chứng quan trọng giúp khách hàng đánh giá năng lực sản xuất thật.</p>
+        <div class="gallery">
+          <figure class="shot reveal" style="--img:url('https://images.unsplash.com/photo-1581093450021-4a7360e9a7c6?auto=format&fit=crop&w=900&q=80')"><figcaption class="caption"><b>Khu vực kỹ thuật / R&D</b>Thay bằng ảnh thật đội ngũ kỹ thuật PKGBattery đang kiểm tra cấu hình pin.</figcaption></figure>
+          <figure class="shot reveal" style="--img:url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80')"><figcaption class="caption"><b>Lắp ráp pack pin</b>Ảnh chi tiết cell, vỏ, dây, BMS hoặc thao tác lắp ráp.</figcaption></figure>
+          <figure class="shot reveal" style="--img:url('https://images.unsplash.com/photo-1581092919535-7146ff1a590b?auto=format&fit=crop&w=900&q=80')"><figcaption class="caption"><b>Kiểm tra chất lượng</b>Ảnh máy đo, test hiệu năng hoặc khu vực QC trước bàn giao.</figcaption></figure>
+          <figure class="shot reveal" style="--img:url('https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?auto=format&fit=crop&w=900&q=80')"><figcaption class="caption"><b>Dây chuyền & thiết bị</b>Ảnh nhà máy, máy móc, kho linh kiện hoặc khu vực sản xuất.</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="chat-luong">
+      <div class="container quality-grid">
+        <div class="lab-panel reveal">
+          <div class="meter"><div style="--h:72%"></div><div style="--h:54%"></div><div style="--h:86%"></div><div style="--h:64%"></div></div>
+        </div>
+        <div>
+          <span class="eyebrow">Kiểm soát chất lượng</span>
+          <h2 class="section-title reveal">An toàn, ổn định và phù hợp yêu cầu dự án.</h2>
+          <p class="section-lead reveal">Mỗi dự án OEM/ODM cần được kiểm soát từ nguồn linh kiện, cấu hình kỹ thuật đến hiệu năng trước bàn giao. Các số liệu dưới đây là placeholder để client thay bằng dữ liệu xác thực.</p>
+          <div class="checks">
+            <div class="check reveal"><i class="red-dot"></i><div><strong>Kiểm soát nguồn linh kiện đầu vào</strong><p>Đánh giá cell, BMS, vỏ, dây, đầu nối và các thành phần liên quan trước khi sản xuất.</p></div></div>
+            <div class="check reveal"><i class="red-dot"></i><div><strong>Kiểm tra cấu hình kỹ thuật</strong><p>Đối chiếu điện áp, dung lượng, dòng tải, giao tiếp và cấu trúc pack theo yêu cầu ứng dụng.</p></div></div>
+            <div class="check reveal"><i class="red-dot"></i><div><strong>Kiểm tra hiệu năng trước bàn giao</strong><p>Thực hiện các bước test cần thiết để giảm rủi ro khi đưa vào vận hành.</p></div></div>
+          </div>
+          <div class="stats reveal">
+            <div class="stat"><b>100+</b><span>Dự án đã thực hiện<br>(placeholder)</span></div>
+            <div class="stat"><b>20+</b><span>Nhóm ứng dụng công nghiệp<br>(placeholder)</span></div>
+            <div class="stat"><b>QC</b><span>Quy trình kiểm tra nhiều bước<br>(placeholder)</span></div>
+            <div class="stat"><b>B2B</b><span>Đối tác trong và ngoài nước<br>(placeholder)</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="chung-chi" class="certs">
+      <div class="container">
+        <div class="split-head">
+          <div class="reveal">
+            <span class="eyebrow">Chứng chỉ & đối tác</span>
+            <h2 class="section-title">Bằng chứng hỗ trợ cho quyết định hợp tác.</h2>
+          </div>
+          <p class="section-lead reveal">PKGBattery đang đồng hành cùng nhiều đối tác trong các dự án pin công nghiệp, phân phối và sản xuất theo yêu cầu. Khu vực này nên thay bằng chứng chỉ, hồ sơ và logo xác thực.</p>
+        </div>
+        <div class="cert-row">
+          <div class="cert reveal"><b>ISO</b><span>Placeholder chứng chỉ hệ thống quản lý.</span></div>
+          <div class="cert reveal"><b>CE</b><span>Placeholder chứng nhận phù hợp tiêu chuẩn.</span></div>
+          <div class="cert reveal"><b>UN38.3</b><span>Placeholder tài liệu vận chuyển pin lithium.</span></div>
+          <div class="cert reveal"><b>MSDS</b><span>Placeholder tài liệu an toàn vật liệu.</span></div>
+          <div class="cert reveal"><b>RoHS</b><span>Placeholder tiêu chuẩn vật liệu.</span></div>
+        </div>
+        <div class="partner-strip reveal" aria-label="Logo đối tác placeholder">
+          <div class="logo-ph">Đối tác A</div><div class="logo-ph">Đối tác B</div><div class="logo-ph">Đối tác C</div><div class="logo-ph">Đối tác D</div><div class="logo-ph">Đối tác E</div><div class="logo-ph">Đối tác F</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tu-van" class="consult">
+      <div class="container consult-grid">
+        <div>
+          <span class="eyebrow">Tư vấn dự án</span>
+          <h2 class="section-title reveal">Bạn đang cần phát triển một sản phẩm pin riêng?</h2>
+          <p class="section-lead reveal">Hãy chia sẻ nhu cầu ứng dụng, thông số mong muốn hoặc bài toán vận hành. Đội ngũ PKGBattery sẽ tư vấn hướng cấu hình phù hợp trước khi báo giá.</p>
+          <div class="hero-actions reveal">
+            <a class="btn btn-primary" href="tel:0900000000">Gọi tư vấn ngay</a>
+            <a class="btn btn-ghost" href="mailto:sales@pkgbattery.vn">Gửi email dự án</a>
+          </div>
+        </div>
+        <form class="contact-card reveal" onsubmit="event.preventDefault(); showFormMessage();">
+          <div class="form-grid">
+            <div class="field"><label>Họ tên</label><input required placeholder="Nguyễn Văn A" /></div>
+            <div class="field"><label>Số điện thoại</label><input required placeholder="0900 000 000" /></div>
+            <div class="field"><label>Doanh nghiệp</label><input placeholder="Tên công ty / nhà máy" /></div>
+            <div class="field"><label>Ứng dụng cần pin</label><input placeholder="Xe nâng, AGV, ESS..." /></div>
+            <div class="field full"><label>Nhu cầu / thông số sơ bộ</label><textarea placeholder="Ví dụ: cần pack pin 48V cho xe nâng, ưu tiên thời gian sạc nhanh và vận hành 2 ca/ngày..."></textarea></div>
+            <div class="field full">
+              <label>Tệp đính kèm nếu có</label>
+              <div class="upload"><span>Bản vẽ, thông số, ảnh thiết bị</span><strong>Chọn tệp</strong></div>
+            </div>
+            <div class="field full"><button class="btn btn-primary" type="submit">Gửi yêu cầu dự án</button></div>
+          </div>
+          <p class="note" id="formNote">Thông tin của bạn chỉ dùng để tư vấn dự án. PKGBattery sẽ phản hồi theo nhu cầu kỹ thuật cụ thể.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="brand"><span class="brand-mark"></span><span>PKGBattery OEM/ODM</span></div>
+      <div>© 2026 PKGBattery. Giao diện demo HTML/CSS/JS cho trang B2B OEM/ODM.</div>
+    </div>
+  </footer>
+
+  <script>
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      })
+    },{threshold:.16});
+    document.querySelectorAll('.reveal,.step').forEach(el=>io.observe(el));
+
+    window.addEventListener('scroll',()=>{
+      const y = window.scrollY;
+      document.documentElement.style.setProperty('--scrollY', y);
+      const heroVisual = document.querySelector('.hero-visual');
+      if(heroVisual){
+        heroVisual.style.transform = `translateY(${Math.min(y * .035, 28)}px)`;
+      }
+    },{passive:true});
+
+    function showFormMessage(){
+      const note = document.getElementById('formNote');
+      note.textContent = 'Đã ghi nhận yêu cầu demo. Khi tích hợp thật, form này sẽ gửi dữ liệu về CRM hoặc email tư vấn.';
+      note.style.color = '#ffffff';
+    }
+
+    document.querySelectorAll('.app,.flow-item,.cert,.reason').forEach(el=>{
+      el.addEventListener('mousemove', e=>{
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', `${e.clientX-r.left}px`);
+        el.style.setProperty('--my', `${e.clientY-r.top}px`);
+      });
+    });
+  </script>
+</body>
+</html>

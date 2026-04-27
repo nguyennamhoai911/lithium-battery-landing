@@ -1,40 +1,91 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap');
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Outfit", sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
   
-  --color-brand-red: #E31E24;
-  --color-brand-black: #1A1A1A;
-  --color-brand-grey: #4A4A4A;
-  --color-brand-offwhite: #F8F9FA;
+  --color-brand-red: #E30613;
+  --color-brand-black: #0F0F0F;
+  --color-brand-gray: #707070;
+  --color-brand-light-gray: #F5F5F5;
+  
+  --animate-reveal-up: reveal-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-draw-line: draw-line 1s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes draw-line {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 @layer base {
   body {
-    @apply bg-brand-offwhite text-brand-black font-sans antialiased;
+    @apply bg-white text-brand-black font-sans antialiased selection:bg-brand-red selection:text-white;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-display font-bold tracking-tight;
   }
 }
 
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.technical-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
 }
 
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+.noise-texture {
+  position: relative;
 }
 
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
+.noise-texture::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+.editorial-content h2 {
+  @apply text-3xl md:text-4xl mt-16 mb-8 relative;
 }
+
+.editorial-content h3 {
+  @apply text-xl md:text-2xl mt-12 mb-6;
+}
+
+.editorial-content p {
+  @apply text-lg leading-relaxed mb-8 text-neutral-800;
+}
+
+.editorial-content ul {
+  @apply space-y-4 mb-8;
+}
+
+.editorial-content li {
+  @apply pl-6 relative text-lg flex items-start;
+}
+
+.editorial-content li::before {
+  content: "";
+  @apply absolute left-0 top-3 w-2 h-[2px] bg-brand-red;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700&display=swap');
